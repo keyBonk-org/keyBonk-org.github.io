@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyBonk</title>
+    <link rel="icon" href="imgs/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app">
+        <nav id="navbar"></nav>
+        <main id="main-content">
+            <div class="hero-section">
+                <div class="hero-text">
+                    <h1 class="hero-title">KeyBonk</h1>
+                    <p class="hero-subtitle">让每一次按键掷地有声</p>
+                    <div class="hero-buttons">
+                        <a class="btn-primary" href="https://github.com/keyBonk-org/KeyBonk/releases/latest" target="_blank" rel="noopener noreferrer">下载keyBonk</a>
+                        <a class="btn-primary" href="docs.html" target="_blank">开发者文档</a>
+                    </div>
+                </div>
+                <div class="hero-icon">
+                    <img src="imgs/icon.png" alt="KeyBonk Icon">
+                </div>
+            </div>
+
+            <div class="projects-section">
+                <h2 class="section-title">项目表</h2>
+                <div class="projects-container">
+                    <button class="scroll-btn scroll-left" id="scrollLeft">‹</button>
+                    <div class="projects-wrapper" id="projectsWrapper">
+                        <a href="https://github.com/keyBonk-org/KeyBonk" target="_blank" class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-name">KeyBonk</h3>
+                                <span class="project-lang">C++</span>
+                            </div>
+                            <p class="project-desc">KeyBonk是一款键盘发声器，属于易语言软件"坤音键盘"的C++实现</p>
+                            <span class="project-link">GitHub</span>
+                        </a>
+                        <a href="https://github.com/keyBonk-org/audio-player" target="_blank" class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-name">audio-player</h3>
+                                <span class="project-lang">C++</span>
+                            </div>
+                            <p class="project-desc">yumo音频播放库，一款C++的音频混合库，负责重叠音效的播放</p>
+                            <span class="project-link">GitHub</span>
+                        </a>
+                        <a href="https://github.com/keyBonk-org/keyBonk-org.github.io" target="_blank" class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-name">官网网站</h3>
+                                <span class="project-lang">HTML/CSS/JS</span>
+                            </div>
+                            <p class="project-desc">一个简单的介绍网站</p>
+                            <span class="project-link">GitHub</span>
+                        </a>
+                        <a href="https://github.com/keyBonk-org/shadow-win32" target="_blank" class="project-card">
+                            <div class="project-header">
+                                <h3 class="project-name">shadow-win32</h3>
+                                <span class="project-lang">C++</span>
+                            </div>
+                            <p class="project-desc">基于win32API实现的C++窗口阴影库，提供简单便捷的窗口阴影功能</p>
+                            <span class="project-link">GitHub</span>
+                        </a>
+                    </div>
+                    <button class="scroll-btn scroll-right" id="scrollRight">›</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/components/navbar.js"></script>
+    <script>
+        Navbar.init();
+
+        const scrollLeft = document.getElementById('scrollLeft');
+        const scrollRight = document.getElementById('scrollRight');
+        const projectsWrapper = document.getElementById('projectsWrapper');
+
+        scrollLeft.addEventListener('click', () => {
+            projectsWrapper.scrollBy({ left: -300, behavior: 'smooth' });
+        });
+
+        scrollRight.addEventListener('click', () => {
+            projectsWrapper.scrollBy({ left: 300, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
