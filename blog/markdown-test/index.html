@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 渲染功能测试 - KeyBonk</title>
+    <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+</head>
+<body>
+    <div id="app">
+        
+        <nav id="navbar" style="display: block;">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="/index.html">
+                        <img src="/imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
+                        KeyBonk
+                    </a>
+                </div>
+                <ul class="navbar-links">
+                    
+                <li>
+                    <a href="/index.html">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="/about/">
+                        关于
+                    </a>
+                </li>
+                <li>
+                    <a href="/projects/">
+                        项目表
+                    </a>
+                </li>
+                <li>
+                    <a href="/blog/" class="active">
+                        博客
+                    </a>
+                </li>
+                <li>
+                    <a href="/docs/">
+                        文档
+                    </a>
+                </li>
+                </ul>
+                <div class="navbar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜索...">
+                        <img src="/imgs/UI/search.png" class="search-icon" alt="搜索">
+                    </div>
+                    <a href="https://github.com/keyBonk-org" target="_blank" class="github-link" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <button class="theme-toggle" title="切换主题">
+                        <img src="/imgs/UI/dark_mood.png" class="theme-toggle-icon" alt="切换主题">
+                    </button>
+                    <button class="menu-toggle" title="菜单">
+                        <img src="/imgs/UI/menu.png" class="menu-icon" alt="菜单">
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-overlay"></div>
+            </div>
+        </nav>
+        <main id="main-content">
+            
+            <div class="content-page blog-page content-page-has-toc">
+                <div class="content-main">
+                    
+                    <div class="article-header">
+                        <h1>Markdown 渲染功能测试</h1>
+                        <div class="article-meta">
+                            <span class="meta-author"><img src="/imgs/traeAI.webp" alt="Trae AI" class="meta-avatar">Trae AI</span>
+                            <span class="meta-date">2026-07-11 4:27:50</span>
+                            <div class="meta-tags"><span class="tag">测试</span><span class="tag">Markdown</span></div>
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h2 id="任务列表">任务列表</h2>
+<p>这是任务列表的测试：</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> 已完成的任务项</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> 第二个已完成任务</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> 未完成的任务项</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> 另一个未完成任务</li>
+<li class="task-list-item"><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> 带<strong>加粗</strong>和 <code>代码</code> 的任务</li>
+</ul>
+<h2 id="脚注">脚注</h2>
+<p>这是一段包含脚注的文字<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>，脚注可以用来补充说明一些额外信息<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>。</p>
+<h2 id="定义列表">定义列表</h2>
+<p>下面是定义列表的测试：</p>
+<dl>
+<dt>KeyBonk</dt>
+<dd>一个键盘音效软件，让每一次按键掷地有声。</dd>
+<dd>采用 C++ 开发，支持自定义音效。</dd>
+<dt>Yumo Audio</dt>
+<dd>基于 Win32 API 的 C++ 音频播放库。</dd>
+<dd>主要聚焦于音频混合等基础 API 无法满足的功能。</dd>
+<dt>Markdown</dt>
+<dd>一种轻量级标记语言。</dd>
+<dd>允许人们使用易读易写的纯文本格式编写文档。</dd>
+</dl>
+<h2 id="下标与上标">下标与上标</h2>
+<h3 id="下标">下标</h3>
+<p>化学式示例：</p>
+<ul>
+<li>水的分子式是 H<sub>2</sub>O</li>
+<li>二氧化碳是 CO<sub>2</sub></li>
+<li>硫酸的分子式是 H<sub>2</sub>SO<sub>4</sub></li>
+</ul>
+<h3 id="上标">上标</h3>
+<p>数学示例：</p>
+<ul>
+<li>勾股定理：a<sup>2</sup> + b<sup>2</sup> = c<sup>2</sup></li>
+<li>爱因斯坦质能方程：E = mc<sup>2</sup></li>
+<li>10<sup>3</sup> = 1000</li>
+</ul>
+<h3 id="混合使用">混合使用</h3>
+<p>有些情况下会同时用到上下标，例如化学中的离子：Ca<sup>2+</sup>、SO<sub>4</sub><sup>2-</sup>。</p>
+<h2 id="提示框">提示框</h2>
+<h3 id="note-提示">Note 提示</h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>这是一个 note 提示框，用于展示一般性的说明信息。</p>
+<p>提示框可以包含多行内容，支持 <strong>Markdown</strong> 格式。</p>
+</div>
+<h3 id="tip-提示">Tip 提示</h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>这是一个 tip 提示框，用于提供实用的小技巧。</p>
+<ul>
+<li>技巧一</li>
+<li>技巧二</li>
+</ul>
+</div>
+<h3 id="info-提示">Info 提示</h3>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>这是一个 info 提示框，用于传达重要信息。</p>
+</div>
+<h3 id="warning-提示">Warning 提示</h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>这是一个 warning 提示框，用于提醒用户注意潜在问题。</p>
+<p><strong>请务必注意！</strong></p>
+</div>
+<h3 id="danger-提示">Danger 提示</h3>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>这是一个 danger 提示框，用于警示严重风险。</p>
+</div>
+<h3 id="自定义容器">自定义容器</h3>
+<div class="note">
+<p>这是使用 <code>:::</code> 语法的自定义容器。</p>
+</div>
+<div class="tip">
+<p>这也是一个自定义容器，类型为 tip。</p>
+</div>
+<h2 id="数学公式">数学公式</h2>
+<h3 id="行内公式">行内公式</h3>
+<p>爱因斯坦的质能方程是 <span class="math inline">E = mc^2</span>，这是物理学中最著名的公式之一。</p>
+<p>勾股定理 <span class="math inline">a^2 + b^2 = c^2</span> 是几何学的基本定理。</p>
+<h3 id="块级公式">块级公式</h3>
+<div class="math block">
+E = mc^2
+</div>
+<div class="math block">
+\sum_{i=1}^{n} i = \frac{n(n+1)}{2}
+</div>
+<div class="math block">
+f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi) e^{2\pi i \xi x} d\xi
+</div>
+<h2 id="表格">表格</h2>
+<p>最后再来一个表格，确保表格功能依然正常：</p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>语法</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务列表</td>
+<td><code>- [x]</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>脚注</td>
+<td><code>[^1]</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>定义列表</td>
+<td><code>术语\n: 定义</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>下标</td>
+<td><code>~text~</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>上标</td>
+<td><code>^text^</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>提示框</td>
+<td><code>!!! type</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>数学公式</td>
+<td><code>$...$</code></td>
+<td>✅ 已启用</td>
+</tr>
+<tr>
+<td>表格</td>
+<td><code>| --- |</code></td>
+<td>✅ 已启用</td>
+</tr>
+</tbody>
+</table>
+<h2 id="总结">总结</h2>
+<p>以上就是所有新增的 Markdown 扩展功能测试。如果所有内容都能正确渲染，说明插件启用成功。</p>
+<hr class="footnotes-sep" />
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>这是第一个脚注的内容，可以包含<strong>富文本</strong>格式。 <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>这是第二个脚注的内容，用来展示多个脚注的效果。脚注会自动编号。 <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+                    </div>
+                </div>
+                
+                <div class="toc-sidebar">
+                    <div class="toc-title">目录</div>
+                    <div class="toc-list">
+                        
+                        <a href="#任务列表" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            任务列表
+                        </a>
+                        <a href="#脚注" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            脚注
+                        </a>
+                        <a href="#定义列表" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            定义列表
+                        </a>
+                        <a href="#下标与上标" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            下标与上标
+                        </a>
+                        <a href="#下标" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            下标
+                        </a>
+                        <a href="#上标" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            上标
+                        </a>
+                        <a href="#混合使用" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            混合使用
+                        </a>
+                        <a href="#提示框" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            提示框
+                        </a>
+                        <a href="#note-提示" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            Note 提示
+                        </a>
+                        <a href="#tip-提示" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            Tip 提示
+                        </a>
+                        <a href="#info-提示" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            Info 提示
+                        </a>
+                        <a href="#warning-提示" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            Warning 提示
+                        </a>
+                        <a href="#danger-提示" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            Danger 提示
+                        </a>
+                        <a href="#自定义容器" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            自定义容器
+                        </a>
+                        <a href="#数学公式" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            数学公式
+                        </a>
+                        <a href="#行内公式" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            行内公式
+                        </a>
+                        <a href="#块级公式" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            块级公式
+                        </a>
+                        <a href="#表格" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            表格
+                        </a>
+                        <a href="#总结" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            总结
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <img src="/imgs/icon.png" alt="KeyBonk Logo" class="footer-logo">
+                    <span class="footer-brand-text">KeyBonk</span>
+                    <p class="footer-tagline">让每一次按键掷地有声</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">导航</h4>
+                    <a href="/index.html">首页</a>
+                    <a href="/about/">关于</a>
+                    <a href="/projects/">项目表</a>
+                    <a href="/blog/">博客</a>
+                    <a href="/docs/">文档</a>
+                </div>
+                <div class="footer-community">
+                    <h4 class="footer-heading">社区</h4>
+                    <a href="https://github.com/keyBonk-org" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/keyBonk-org/KeyBonk/releases/latest" target="_blank" rel="noopener noreferrer">最新发布</a>
+                </div>
+                <div class="footer-friends">
+                    <h4 class="footer-heading">友链</h4>
+                    <a href="https://xiaoditx.github.io" target="_blank" rel="noopener noreferrer">小狄の站</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KeyBonk. WTFPL 协议开源。</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/components/navbar.js"></script>
+    <script>
+        Navbar.init();
+        hljs.highlightAll();
+    </script>
+</body>
+</html>

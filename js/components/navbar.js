@@ -2,28 +2,12 @@ const Navbar = (function() {
     const navbarEl = document.getElementById('navbar');
 
     const navLinks = [
-        { path: 'index.html', label: '首页' },
-        { path: 'about.html', label: '关于' },
-        { path: 'projects.html', label: '项目表' },
-        { path: 'blog.html', label: '博客' },
-        { path: 'docs.html', label: '文档' }
+        { path: '/index.html', label: '首页' },
+        { path: '/about/', label: '关于' },
+        { path: '/projects/', label: '项目表' },
+        { path: '/blog/', label: '博客' },
+        { path: '/docs/', label: '文档' }
     ];
-
-    function getBasePath() {
-        const path = window.location.pathname;
-        const normalizedPath = path.replace(/\\/g, '/');
-        const projectRoot = 'keyBonk-org.github.io';
-        const rootIndex = normalizedPath.indexOf(projectRoot);
-        if (rootIndex === -1) {
-            return '';
-        }
-        const afterRoot = normalizedPath.substring(rootIndex + projectRoot.length);
-        const subDirs = afterRoot.split('/').filter(p => p && !p.includes('.html'));
-        if (subDirs.length > 0) {
-            return '../'.repeat(subDirs.length);
-        }
-        return '';
-    }
 
     function getTheme() {
         const saved = localStorage.getItem('keybonk-theme');
@@ -35,29 +19,80 @@ const Navbar = (function() {
 
     function applyTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        const basePath = getBasePath();
         const searchIcon = document.querySelector('.search-icon');
         const toggleIcon = document.querySelector('.theme-toggle-icon');
+        const menuIcon = document.querySelector('.menu-icon');
         if (searchIcon) {
-            searchIcon.src = basePath + 'imgs/UI/' + (theme === 'dark' ? 'search_dark.png' : 'search.png');
+            searchIcon.src = '/imgs/UI/' + (theme === 'dark' ? 'search_dark.png' : 'search.png');
         }
         if (toggleIcon) {
-            toggleIcon.src = basePath + 'imgs/UI/' + (theme === 'dark' ? 'light_mood.png' : 'dark_mood.png');
+            toggleIcon.src = '/imgs/UI/' + (theme === 'dark' ? 'light_mood.png' : 'dark_mood.png');
+        }
+        if (menuIcon) {
+            menuIcon.src = '/imgs/UI/' + (theme === 'dark' ? 'menu_dark.png' : 'menu.png');
         }
     }
 
+    function normalizePath(path) {
+        let p = path.replace(/\\/g, '/');
+        if (p === '/' || p === '') {
+            return '/index.html';
+        }
+        if (!p.startsWith('/')) {
+            p = '/' + p;
+        }
+        if (p.endsWith('/')) {
+            p = p.slice(0, -1);
+        }
+        return p;
+    }
+
+    function getCurrentPage() {
+        return normalizePath(window.location.pathname);
+    }
+
+    function renderMobileMenu(currentPage) {
+        const theme = getTheme();
+        const searchIconSrc = theme === 'dark' ? 'search_dark.png' : 'search.png';
+        const linksHtml = navLinks.map(link => {
+            const normalizedLink = normalizePath(link.path);
+            const isActive = currentPage === normalizedLink || 
+                           (normalizedLink !== '/index.html' && currentPage.startsWith(normalizedLink + '/'));
+            return `
+                <li>
+                    <a href="${link.path}" class="${isActive ? 'active' : ''}" onclick="Navbar.closeMobileMenu()">
+                        ${link.label}
+                    </a>
+                </li>
+            `;
+        }).join('');
+
+        return `
+            <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+            <ul class="mobile-menu" id="mobileMenu">
+                <li class="mobile-search">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜索..." />
+                        <img src="/imgs/UI/${searchIconSrc}" class="search-icon" alt="搜索" />
+                    </div>
+                </li>
+                ${linksHtml}
+            </ul>
+        `;
+    }
+
     function render(currentPage) {
-        const basePath = getBasePath();
         const theme = getTheme();
         const searchIconSrc = theme === 'dark' ? 'search_dark.png' : 'search.png';
         const toggleIconSrc = theme === 'dark' ? 'light_mood.png' : 'dark_mood.png';
+        const menuIconSrc = theme === 'dark' ? 'menu_dark.png' : 'menu.png';
         const linksHtml = navLinks.map(link => {
-            const linkFileName = link.path.substring(link.path.lastIndexOf('/') + 1);
-            const currentFileName = currentPage.substring(currentPage.lastIndexOf('/') + 1);
-            const isActive = linkFileName === currentFileName;
+            const normalizedLink = normalizePath(link.path);
+            const isActive = currentPage === normalizedLink || 
+                           (normalizedLink !== '/index.html' && currentPage.startsWith(normalizedLink + '/'));
             return `
                 <li>
-                    <a href="${basePath}${link.path}" class="${isActive ? 'active' : ''}">
+                    <a href="${link.path}" class="${isActive ? 'active' : ''}">
                         ${link.label}
                     </a>
                 </li>
@@ -67,8 +102,8 @@ const Navbar = (function() {
         navbarEl.innerHTML = `
             <div class="navbar-container">
                 <div class="navbar-brand">
-                    <a href="${basePath}index.html">
-                        <img src="${basePath}imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
+                    <a href="/index.html">
+                        <img src="/imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
                         KeyBonk
                     </a>
                 </div>
@@ -78,7 +113,7 @@ const Navbar = (function() {
                 <div class="navbar-right">
                     <div class="search-box">
                         <input type="text" placeholder="搜索..." />
-                        <img src="${basePath}imgs/UI/${searchIconSrc}" class="search-icon" alt="搜索" />
+                        <img src="/imgs/UI/${searchIconSrc}" class="search-icon" alt="搜索" />
                     </div>
                     <a href="https://github.com/keyBonk-org" target="_blank" class="github-link" title="GitHub">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
@@ -86,7 +121,10 @@ const Navbar = (function() {
                         </svg>
                     </a>
                     <button class="theme-toggle" id="themeToggle" title="切换主题">
-                        <img src="${basePath}imgs/UI/${toggleIconSrc}" class="theme-toggle-icon" alt="切换主题" />
+                        <img src="/imgs/UI/${toggleIconSrc}" class="theme-toggle-icon" alt="切换主题" />
+                    </button>
+                    <button class="menu-toggle" id="menuToggle" title="菜单">
+                        <img src="/imgs/UI/${menuIconSrc}" class="menu-icon" alt="菜单" />
                     </button>
                 </div>
             </div>
@@ -103,6 +141,48 @@ const Navbar = (function() {
                 applyTheme(next);
             });
         }
+
+        const menuBtn = document.getElementById('menuToggle');
+        if (menuBtn) {
+            menuBtn.addEventListener('click', openMobileMenu);
+        }
+    }
+
+    function openMobileMenu() {
+        let overlay = document.getElementById('mobileMenuOverlay');
+        let menu = document.getElementById('mobileMenu');
+
+        if (!overlay) {
+            const menuHtml = renderMobileMenu(getCurrentPage());
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = menuHtml;
+            
+            while (tempDiv.firstElementChild) {
+                document.body.appendChild(tempDiv.firstElementChild);
+            }
+
+            overlay = document.getElementById('mobileMenuOverlay');
+            menu = document.getElementById('mobileMenu');
+
+            overlay.addEventListener('click', closeMobileMenu);
+        }
+
+        menu.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileMenu() {
+        const overlay = document.getElementById('mobileMenuOverlay');
+        const menu = document.getElementById('mobileMenu');
+
+        if (menu) {
+            menu.remove();
+        }
+        if (overlay) {
+            overlay.remove();
+        }
+        document.body.style.overflow = '';
     }
 
     function toggle(show) {
@@ -111,12 +191,6 @@ const Navbar = (function() {
         } else {
             navbarEl.style.display = 'none';
         }
-    }
-
-    function getCurrentPage() {
-        const path = window.location.pathname;
-        const parts = path.split('/');
-        return parts[parts.length - 1] || 'index.html';
     }
 
     function init(options = {}) {
@@ -135,6 +209,7 @@ const Navbar = (function() {
     return {
         init,
         toggle,
-        render
+        render,
+        closeMobileMenu
     };
 })();

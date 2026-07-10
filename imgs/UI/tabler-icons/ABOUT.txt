@@ -8,3 +8,4 @@ search.png
 search_dark.png
 dark_mood.png
 light_mood.png
+menu.png

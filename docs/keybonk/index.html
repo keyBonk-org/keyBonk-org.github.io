@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyBonk - KeyBonk</title>
+    <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+</head>
+<body>
+    <div id="app">
+        
+        <nav id="navbar" style="display: block;">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="/index.html">
+                        <img src="/imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
+                        KeyBonk
+                    </a>
+                </div>
+                <ul class="navbar-links">
+                    
+                <li>
+                    <a href="/index.html">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="/about/">
+                        关于
+                    </a>
+                </li>
+                <li>
+                    <a href="/projects/">
+                        项目表
+                    </a>
+                </li>
+                <li>
+                    <a href="/blog/">
+                        博客
+                    </a>
+                </li>
+                <li>
+                    <a href="/docs/">
+                        文档
+                    </a>
+                </li>
+                </ul>
+                <div class="navbar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜索...">
+                        <img src="/imgs/UI/search.png" class="search-icon" alt="搜索">
+                    </div>
+                    <a href="https://github.com/keyBonk-org" target="_blank" class="github-link" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <button class="theme-toggle" title="切换主题">
+                        <img src="/imgs/UI/dark_mood.png" class="theme-toggle-icon" alt="切换主题">
+                    </button>
+                    <button class="menu-toggle" title="菜单">
+                        <img src="/imgs/UI/menu.png" class="menu-icon" alt="菜单">
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-overlay"></div>
+            </div>
+        </nav>
+        <main id="main-content">
+            
+            <div class="content-page content-page-has-toc">
+                
+                <div class="content-sidebar" id="contentSidebar">
+                    <div class="sidebar-tree" id="sidebarTree">
+                        
+                        <div class="sidebar-item has-children active">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/keybonk/install/" class="sidebar-item-title">安装指南</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="sidebar-item has-children collapsed">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/usage/" class="sidebar-item-title">API 使用指南</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-main">
+                    
+                    <div class="article-header">
+                        <h1>KeyBonk</h1>
+                        <div class="article-meta">
+                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                            <span class="meta-date">2026-07-10</span>
+                            
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <!-- markdownlint-disable -->
+<div align="center">
+<img alt="LOGO" src="./resource/icon.png" width="256" height="256" />
+<h1>发声键盘 - KeyBonk</h1>
+<p>V 1.3.0.1 （基础版）</p>
+<br>
+<div>
+    <img alt="C++" src="https://img.shields.io/badge/C++-17-%2300599C?logo=cplusplus">
+</div>
+<div>
+    <img alt="platform" src="https://img.shields.io/badge/platform-Windows-blueviolet">
+</div>
+<div>
+    <img alt="license" src="https://img.shields.io/github/license/xiaoditx/KeyBonk">
+    <img alt="commit" src="https://img.shields.io/github/commit-activity/m/xiaoditx/KeyBonk">
+</div>
+<div>
+    <img alt="stars" src="https://img.shields.io/github/stars/xiaoditx/KeyBonk?style=social">
+    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/xiaoditx/KeyBonk/total?style=social">
+</div>
+</div>
+<br>
+<div>
+    <a href="#开发信息">贡献者帮助信息</a>
+</div>
+<br>
+<!-- markdownlint-restore -->
+<p>基于曾经做过的唯一能入眼的软件“坤音键盘”的4.0版本重构的C++版本，原版公开了源码但没有传到GitHub，因为那是一个易语言项目，源码只有一个文件所以似乎没有什么开到GitHub的必要（况且GitHub默认不识别易语言，虽然我们可以手动设定但我不喜欢）</p>
+<h3 id="重构的变动">重构的变动</h3>
+<p>重构将语言换为了C++，使得运行效率得到了提升，同时抛弃了原本使用注册热键实现的极为愚蠢的方式，改用了键盘钩子作为了监视方法。</p>
+<p>这是我接触Win32开发的第一个项目，算是我练手用的了，希望各位可以喜欢</p>
+<p>另外，目前有使用Godot重构的打算，但考虑到C++版本还没写完（且我不会Godot），这个重构会暂缓。</p>
+<p>本次重构衍生出了项目<a href="https://github.com/xiaoditx/audio-player">audio-player</a>，但..额...好吧我似乎有点高估自己了，这个项目一直在卡着导致我现在没心思继续往下写了，后续更新随缘吧</p>
+<h3 id="安装">安装</h3>
+<p>软件安装包在<a href="https://github.com/xiaoditx/KeyBonk/releases">Release</a>页面，请选择你想要的版本，推荐使用最新版的前一个版本</p>
+<p>软件仅支持Windows，提供64位和32位两个版本</p>
+<h3 id="使用说明">使用说明</h3>
+<p>打开软件，软件将监测按键，默认检测<code>j</code>、<code>n</code>、<code>t</code>、<code>m</code>四个按键，按下播放对应音频</p>
+<p>音频文件在<code>./bin/default/audios</code>下，文件名为想要监测的按键的虚拟键值+“.wav”（仅支持wav）。有关虚拟键值，想要获取可以使用我在BeepMusic中使用过的工具：<a href="https://github.com/xiaoditx/BeepMusic/tree/main/tools/XD%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-T1">键值查询工具</a>。也可以查阅<a href="https://learn.microsoft.com/zh-cn/windows/win32/inputdev/virtual-key-codes">微软文档</a></p>
+<p>背景文件可更换，简单的方法是使用自己的图片替换掉<code>./bin/default/background.png</code>即可，目前测试仅证明了png有效。当前版本不支持自动检测图片尺寸，不支持颜色过滤自定义（当前版本将十进制色号13217535的颜色设为透明）</p>
+<p>可以自建一个文件夹（推荐作为<code>./bin/</code>的子文件夹），在内部自行搭建audios文件夹并自行放置background.png，想要让软件识别该文件夹，当前版本唯一有效的方法是修改config.ini，在文件末尾添加：</p>
+<pre><code class="language-text">[settings]
+lib=（你自己创建的文件夹路径比如.\bin\default）
+</code></pre>
+<h3 id="开发信息">开发信息</h3>
+<p>项目文档：<a href="./docs">docs</a></p>
+<p>软件技术栈</p>
+<ul>
+<li>win32</li>
+<li>C++17</li>
+<li>GDI+</li>
+<li>~<sub>COM库</sub>~（计划引入）</li>
+</ul>
+<p>开发环境</p>
+<ul>
+<li>Windows10-x64</li>
+<li>MSYS2（MingGW64）</li>
+<li>VScode</li>
+<li>GNU Make（4.4.1）</li>
+</ul>
+<h2 id="贡献者">贡献者</h2>
+<p>感谢社区的贡献者们（其实现在并没有）</p>
+<a href="https://github.com/xiaoditx/keybonk/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=xiaoditx/keybonk" />
+</a>
+<h2 id="项目统计">项目统计</h2>
+<a href="https://www.star-history.com/#xiaoditx/keybonk&type=date&legend=top-left">
+ <picture>
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
+ </picture>
+</a>
+<p><img src="https://repobeats.axiom.co/api/embed/148eacdfa3e1268ce951923b74ab7f6ed8d8a9e7.svg" alt="Alt" title="Repobeats analytics image" /></p>
+
+                    </div>
+                </div>
+                
+                <div class="toc-sidebar">
+                    <div class="toc-title">目录</div>
+                    <div class="toc-list">
+                        
+                        <a href="#重构的变动" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            重构的变动
+                        </a>
+                        <a href="#安装" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            安装
+                        </a>
+                        <a href="#使用说明" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            使用说明
+                        </a>
+                        <a href="#开发信息" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            开发信息
+                        </a>
+                        <a href="#贡献者" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            贡献者
+                        </a>
+                        <a href="#项目统计" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            项目统计
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <img src="/imgs/icon.png" alt="KeyBonk Logo" class="footer-logo">
+                    <span class="footer-brand-text">KeyBonk</span>
+                    <p class="footer-tagline">让每一次按键掷地有声</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">导航</h4>
+                    <a href="/index.html">首页</a>
+                    <a href="/about/">关于</a>
+                    <a href="/projects/">项目表</a>
+                    <a href="/blog/">博客</a>
+                    <a href="/docs/">文档</a>
+                </div>
+                <div class="footer-community">
+                    <h4 class="footer-heading">社区</h4>
+                    <a href="https://github.com/keyBonk-org" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/keyBonk-org/KeyBonk/releases/latest" target="_blank" rel="noopener noreferrer">最新发布</a>
+                </div>
+                <div class="footer-friends">
+                    <h4 class="footer-heading">友链</h4>
+                    <a href="https://xiaoditx.github.io" target="_blank" rel="noopener noreferrer">小狄の站</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KeyBonk. WTFPL 协议开源。</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/components/navbar.js"></script>
+    <script>
+        Navbar.init();
+        hljs.highlightAll();
+    </script>
+</body>
+</html>

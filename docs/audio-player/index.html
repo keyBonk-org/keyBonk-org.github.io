@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yumo audio文档 - KeyBonk</title>
+    <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+</head>
+<body>
+    <div id="app">
+        
+        <nav id="navbar" style="display: block;">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="/index.html">
+                        <img src="/imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
+                        KeyBonk
+                    </a>
+                </div>
+                <ul class="navbar-links">
+                    
+                <li>
+                    <a href="/index.html">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="/about/">
+                        关于
+                    </a>
+                </li>
+                <li>
+                    <a href="/projects/">
+                        项目表
+                    </a>
+                </li>
+                <li>
+                    <a href="/blog/">
+                        博客
+                    </a>
+                </li>
+                <li>
+                    <a href="/docs/">
+                        文档
+                    </a>
+                </li>
+                </ul>
+                <div class="navbar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜索...">
+                        <img src="/imgs/UI/search.png" class="search-icon" alt="搜索">
+                    </div>
+                    <a href="https://github.com/keyBonk-org" target="_blank" class="github-link" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <button class="theme-toggle" title="切换主题">
+                        <img src="/imgs/UI/dark_mood.png" class="theme-toggle-icon" alt="切换主题">
+                    </button>
+                    <button class="menu-toggle" title="菜单">
+                        <img src="/imgs/UI/menu.png" class="menu-icon" alt="菜单">
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-overlay"></div>
+            </div>
+        </nav>
+        <main id="main-content">
+            
+            <div class="content-page content-page-has-toc">
+                
+                <div class="content-sidebar" id="contentSidebar">
+                    <div class="sidebar-tree" id="sidebarTree">
+                        
+                        <div class="sidebar-item has-children collapsed">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/keybonk/install/" class="sidebar-item-title">安装指南</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="sidebar-item has-children active">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/usage/" class="sidebar-item-title">API 使用指南</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-main">
+                    
+                    <div class="article-header">
+                        <h1>Yumo audio文档</h1>
+                        <div class="article-meta">
+                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                            <span class="meta-date">2026-07-11</span>
+                            
+                        </div>
+                    </div>
+                    <div class="article-content">
+                        <h1>Yumo Audio</h1>
+<p>Yumo Audio是利用WIN32 API实现的C++音频播放库，主要聚焦于音频混合等基础API无法满足的功能，属于自用型库，完全服务于<a href="https://github.com/xiaoditx/keyBonk">keyBonk</a>所以有一些通用功能将不予考虑</p>
+<p>由于上文提到的自用特性，本库结构异常混乱，不支持CMake构建，部分文件缺失需要手动补齐，因此暂不建议直接使用。如果必须使用，请自行改造本库。</p>
+<p>本库90%的部分为vibe coding产物，其中的80%未经人工审查，请谨慎使用。</p>
+<p>目前开发进度：基本实现，基本接口已经具备，但是通用性不强，限制条件多</p>
+<h2 id="一-兼容性">一. 兼容性</h2>
+<h3 id="1平台">1.平台</h3>
+<p>Windows独占</p>
+<h3 id="2文件格式">2.文件格式</h3>
+<p>（格式按扩展名记）</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式</th>
+<th style="text-align:center">是否支持</th>
+<th style="text-align:center">支持程度</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">WAV</td>
+<td style="text-align:center">支持</td>
+<td style="text-align:center">暂不支持携带扩展信息的WAV</td>
+</tr>
+<tr>
+<td style="text-align:center">PCM</td>
+<td style="text-align:center">即将支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">MP3</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">MP4</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">M4A</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">OGG</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">FLAC</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">WMA</td>
+<td style="text-align:center">不支持</td>
+<td style="text-align:center">-</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3是否兼容c语言">3.是否兼容C语言</h3>
+<p>Yumo Audio大量采用C++特性编写，不兼容C语言，虽然可以通过函数包装链接到C，但库内不提供这些包装</p>
+<h2 id="二-技术栈">二. 技术栈</h2>
+<ul>
+<li>C++</li>
+<li>WIN32 API</li>
+</ul>
+<h2 id="三-开发者帮助">三. 开发者帮助</h2>
+<p>暂无</p>
+
+                    </div>
+                </div>
+                
+                <div class="toc-sidebar">
+                    <div class="toc-title">目录</div>
+                    <div class="toc-list">
+                        
+                        <a href="#一-兼容性" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            一. 兼容性
+                        </a>
+                        <a href="#1平台" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            1.平台
+                        </a>
+                        <a href="#2文件格式" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            2.文件格式
+                        </a>
+                        <a href="#3是否兼容c语言" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            3.是否兼容C语言
+                        </a>
+                        <a href="#二-技术栈" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            二. 技术栈
+                        </a>
+                        <a href="#三-开发者帮助" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            三. 开发者帮助
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <img src="/imgs/icon.png" alt="KeyBonk Logo" class="footer-logo">
+                    <span class="footer-brand-text">KeyBonk</span>
+                    <p class="footer-tagline">让每一次按键掷地有声</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">导航</h4>
+                    <a href="/index.html">首页</a>
+                    <a href="/about/">关于</a>
+                    <a href="/projects/">项目表</a>
+                    <a href="/blog/">博客</a>
+                    <a href="/docs/">文档</a>
+                </div>
+                <div class="footer-community">
+                    <h4 class="footer-heading">社区</h4>
+                    <a href="https://github.com/keyBonk-org" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/keyBonk-org/KeyBonk/releases/latest" target="_blank" rel="noopener noreferrer">最新发布</a>
+                </div>
+                <div class="footer-friends">
+                    <h4 class="footer-heading">友链</h4>
+                    <a href="https://xiaoditx.github.io" target="_blank" rel="noopener noreferrer">小狄の站</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KeyBonk. WTFPL 协议开源。</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/components/navbar.js"></script>
+    <script>
+        Navbar.init();
+        hljs.highlightAll();
+    </script>
+</body>
+</html>
