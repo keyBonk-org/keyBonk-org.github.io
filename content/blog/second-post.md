@@ -1,11 +1,11 @@
-{
-    "date": "2026-07-11 3:12:13",
-    "author": "小狄同学呀",
-    "avatar": "/imgs/xiaodi.jpg",
-    "title": "Yumo Audio v0.0.1 正式发布",
-    "summary": "Yumo Audio —— 基于 Win32 API 的 C++ 音频播放库，首个版本 v0.0.1 发布。聚焦音频混合等基础 API 无法满足的功能，服务于 KeyBonk 项目。",
-    "tags": ["发布", "音频库", "Yumo Audio"]
-}
+---
+date: 2026-07-11 3:12:13
+author: 小狄同学呀
+avatar: /imgs/xiaodi.jpg
+title: Yumo Audio v0.0.1 正式发布
+summary: Yumo Audio —— 基于 Win32 API 的 C++ 音频播放库，首个版本 v0.0.1 发布。聚焦音频混合等基础 API 无法满足的功能，服务于 KeyBonk 项目。
+tags: ["发布", "音频库", "Yumo Audio"]
+---
 
 ## 发布说明
 

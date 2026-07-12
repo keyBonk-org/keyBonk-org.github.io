@@ -1,9 +1,11 @@
-{
-    "date": "2026-07-11",
-    "author": "小狄同学呀",
-    "avatar": "/imgs/xiaodi.jpg",
-    "title": "Yumo audio文档"
-}
+---
+date: 2026-07-11
+author: 小狄同学呀
+avatar: /imgs/xiaodi.jpg
+title: Yumo audio文档
+summary: Yumo Audio的文档以及库开发者帮助文档
+tags: ["Yumo Audio", "文档", "readme"]
+---
 
 # Yumo Audio
 

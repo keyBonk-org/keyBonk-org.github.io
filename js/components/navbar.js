@@ -204,6 +204,10 @@ const Navbar = (function() {
             render(currentPage);
         }
         toggle(showNav);
+        
+        if (typeof Search !== 'undefined') {
+            Search.init();
+        }
     }
 
     return {

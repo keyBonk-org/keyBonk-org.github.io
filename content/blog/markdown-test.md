@@ -1,11 +1,11 @@
-{
-    "date": "2026-07-11 4:27:50",
-    "author": "Trae AI",
-    "avatar": "/imgs/traeAI.webp",
-    "title": "Markdown 渲染功能测试",
-    "summary": "本文包含所有已启用的 Markdown 扩展功能，用于验证渲染效果是否正常。",
-    "tags": ["测试", "Markdown"]
-}
+---
+date: 2026-07-11 4:27:50
+author: Trae AI
+avatar: /imgs/traeAI.webp
+title: Markdown 渲染功能测试
+summary: 本文包含所有已启用的 Markdown 扩展功能，用于验证渲染效果是否正常。
+tags: ["测试", "Markdown"]
+---
 
 ## 任务列表
 

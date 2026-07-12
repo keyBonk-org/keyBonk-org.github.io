@@ -2,6 +2,7 @@ import os
 import re
 import json
 import shutil
+import yaml
 from datetime import datetime
 from markdown_it import MarkdownIt
 from mdit_py_plugins.tasklists import tasklists_plugin
@@ -54,12 +55,64 @@ FOOTER = '''
         </footer>
 '''
 
+def extract_text_from_markdown(md_content):
+    text = md_content
+    
+    text = re.sub(r'```[\s\S]*?```', '', text)
+    text = re.sub(r'`[^`]+`', '', text)
+    
+    text = re.sub(r'!\[([^\]]*)\]\([^)]+\)', r'\1', text)
+    text = re.sub(r'\[([^\]]*)\]\([^)]+\)', r'\1', text)
+    
+    text = re.sub(r'<[^>]+>', '', text)
+    
+    text = re.sub(r'^#{1,6}\s+', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+    text = re.sub(r'\*([^*]+)\*', r'\1', text)
+    text = re.sub(r'__([^_]+)__', r'\1', text)
+    text = re.sub(r'_([^_]+)_', r'\1', text)
+    text = re.sub(r'~~([^~]+)~~', r'\1', text)
+    
+    text = re.sub(r'^(\s*[-*+]\s+)+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\s*\d+\.\s+', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'^>\s*', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'^\s*!!!\s*\w+\s*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\s*:::\s*\w*\s*$', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'\$\$[\s\S]*?\$\$', '', text)
+    text = re.sub(r'\$[^$]+\$', '', text)
+    
+    text = re.sub(r'\[\^[\w]+\]', '', text)
+    text = re.sub(r'^\[\^[\w]+\]:', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'^\s*-{3,}\s*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\s*\*{3,}\s*$', '', text, flags=re.MULTILINE)
+    text = re.sub(r'^\s*_{3,}\s*$', '', text, flags=re.MULTILINE)
+    
+    text = re.sub(r'\|\s*---\s*\|', ' ', text)
+    
+    text = re.sub(r'\s+', ' ', text)
+    
+    return text.strip()
+
 def parse_frontmatter(content):
     trimmed = content.strip()
     meta = {}
     body = content
     
-    if trimmed.startswith('{'):
+    if trimmed.startswith('---'):
+        end_match = re.search(r'^\s*---\s*$', trimmed[3:], re.MULTILINE)
+        if end_match:
+            yaml_content = trimmed[3:3 + end_match.start()].strip()
+            try:
+                meta = yaml.safe_load(yaml_content) or {}
+                body = trimmed[3 + end_match.end():].strip()
+            except:
+                pass
+    elif trimmed.startswith('{'):
         brace_count = 0
         json_end_index = -1
         for i, char in enumerate(trimmed):
@@ -413,7 +466,10 @@ def flatten_articles(items):
     return result
 
 def render_list_page(type, nav_items, active_path=None):
-    articles = flatten_articles(nav_items)
+    if type == 'docs':
+        articles = [item for item in nav_items if item.get('path')]
+    else:
+        articles = flatten_articles(nav_items)
     
     if type == 'blog':
         def parse_date(s):
@@ -505,6 +561,7 @@ def render_page(title, content, has_sidebar=False, nav_items=None, base_path=Non
     </div>
 
     <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/search.js"></script>
     <script src="/js/components/navbar.js"></script>
     <script>
         Navbar.init();
@@ -521,6 +578,8 @@ def build_site():
         'docs': 'docs',
         'blog': 'blog'
     }
+    
+    search_index = []
     
     for type_name, output_dir in output_dirs.items():
         content_type_dir = os.path.join(content_dir, type_name)
@@ -548,7 +607,7 @@ def build_site():
         def build_pages(items, current_path=""):
             for item in items:
                 if 'children' in item and item['children']:
-                    build_pages(item['children'], os.path.join(current_path, item['path']) if item.get('path') else current_path)
+                    build_pages(item['children'], os.path.join(current_path, item.get('url_path', item['path'])) if item.get('path') else current_path)
                 
                 if item.get('path'):
                     md_rel_path = item['path']
@@ -567,6 +626,40 @@ def build_site():
                             content = f.read()
                         
                         meta, body = parse_frontmatter(content)
+                        
+                        plain_text = extract_text_from_markdown(body)
+                        
+                        headings = []
+                        heading_contents = {}
+                        heading_matches = list(re.finditer(r'^(#{1,4})\s+(.+)$', body, re.MULTILINE))
+                        
+                        for i, match in enumerate(heading_matches):
+                            level = len(match.group(1))
+                            text = match.group(2).strip()
+                            headings.append({
+                                'level': level,
+                                'text': text
+                            })
+                            
+                            if i < len(heading_matches) - 1:
+                                next_match = heading_matches[i + 1]
+                                content_between = body[match.end():next_match.start()].strip()
+                            else:
+                                content_between = body[match.end():].strip()
+                            
+                            heading_contents[text] = extract_text_from_markdown(content_between)
+                        
+                        search_index.append({
+                            'title': meta.get('title', ''),
+                            'url': f'/{type_name}/{url_path}/',
+                            'content': body,
+                            'plain_text': plain_text,
+                            'type': type_name,
+                            'headings': headings,
+                            'heading_contents': heading_contents,
+                            'full_path': url_path
+                        })
+                        
                         article_html = render_markdown(body)
                         article_html, toc = extract_toc_and_add_ids(article_html)
                         header_html = render_article_header(meta)
@@ -602,6 +695,12 @@ def build_site():
                         print(f'Generated {type_name}/{url_path}/ (index.html)')
         
         build_pages(nav_items)
+    
+    search_index_path = os.path.join('js', 'search_index.json')
+    os.makedirs(os.path.dirname(search_index_path), exist_ok=True)
+    with open(search_index_path, 'w', encoding='utf-8') as f:
+        json.dump(search_index, f, ensure_ascii=False)
+    print(f'Generated search index: {search_index_path}')
     
     print('\nBuild complete!')
 

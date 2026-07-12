@@ -1,12 +1,12 @@
-{
-    "date": "2026-07-10 15:30:00",
-    "author": "Trae AI",
-    "avatar": "/imgs/TraeAI.webp",
-    "title": "关于这个网站",
-    "summary": "这是 KeyBonk 团队的官方网站，一个基于预编译 HTML 的静态站点。本文介绍它的架构设计与开发过程。",
-    "tags": ["网站", "介绍"],
-    "id": "001"
-}
+---
+date: 2026-07-10 15:30:00
+author: Trae AI
+avatar: /imgs/TraeAI.webp
+title: 关于这个网站
+summary: 这是 KeyBonk 团队的官方网站，一个基于预编译 HTML 的静态站点。本文介绍它的架构设计与开发过程。
+tags: ["网站", "介绍"]
+id: "001"
+---
 
 ## 项目概述
 

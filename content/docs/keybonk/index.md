@@ -1,15 +1,17 @@
-    {
-    "date": "2026-07-10",
-    "author": "小狄同学呀",
-    "avatar": "/imgs/xiaodi.jpg",
-    "title": "KeyBonk"
-}
+---
+date: 2026-07-10
+author: 小狄同学呀
+avatar: /imgs/xiaodi.jpg
+title: KeyBonk
+summary: 发声键盘的使用教程、开发者文档以及音频库开发文档
+tags: ["KeyBonk", "文档", "readme"]
+---
 
 <!-- markdownlint-disable -->
 
 <div align="center">
 
-<img alt="LOGO" src="./resource/icon.png" width="256" height="256" />
+<img alt="LOGO" src="https://github.com/keyBonk-org/KeyBonk/blob/master/resource/icon.png?raw=true" width="256" height="256" />
 
 # 发声键盘 - KeyBonk
 
@@ -49,7 +51,7 @@ V 1.3.0.1 （基础版）
 
 另外，目前有使用Godot重构的打算，但考虑到C++版本还没写完（且我不会Godot），这个重构会暂缓。
 
-本次重构衍生出了项目[audio-player](https://github.com/xiaoditx/audio-player)，但..额...好吧我似乎有点高估自己了，这个项目一直在卡着导致我现在没心思继续往下写了，后续更新随缘吧
+本次重构衍生出了项目[audio-player](https://github.com/xiaoditx/audio-player)，这是一个音频库，用于播放音频文件。
 
 ### 安装
 
