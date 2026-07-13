@@ -22,8 +22,8 @@ body {
     right: 0;
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
     color: #333;
     padding: 0 20px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -179,11 +179,13 @@ body {
     font-size: 0.8rem;
     color: #666;
     line-height: 1.4;
-    max-height: 42px;
+    max-height: 42px; /* 防止clamp失效 */
     overflow: hidden;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
+    display: -webkit-box; /* 旧版WebKit内核必须 */
+    -webkit-line-clamp: 2; /* 旧版Chrome/Safari/Opera等 */
+    -webkit-box-orient: vertical; /* 旧版必须与上一行配合 */
+    /* 标准属性，用于兼容 Chrome 113+、Firefox 114+、Safari 17+ */
+    line-clamp: 2; 
 }
 
 .search-match {
@@ -648,7 +650,8 @@ body {
     transform: scale(0.95);
 }
 
-.projects-wrapper {
+/* 插眼，改错了回来改 */
+/* .projects-wrapper {
     flex: 1;
     display: flex;
     gap: 20px;
@@ -657,6 +660,27 @@ body {
     scrollbar-width: none;
     -ms-overflow-style: none;
     padding: 10px 0;
+} */
+
+.projects-wrapper {
+    flex: 1;
+    display: flex;
+    gap: 20px; 
+    overflow-x: auto;
+    scroll-behavior: smooth; /* Safari 15.4+ 支持，旧版降级为无动画跳转，不影响功能 */
+    padding: 10px 0;
+    /* Firefox） */
+    @supports (scrollbar-width: none) {
+        scrollbar-width: none;
+    }
+    /* IE和旧版Edge */
+    -ms-overflow-style: none;
+    /* Chrome/Safari/Opera/新版Edge (WebKit内核) */
+    &::-webkit-scrollbar {
+        display: none;
+        width: 0;
+        height: 0;
+    }
 }
 
 .projects-wrapper::-webkit-scrollbar {
@@ -877,8 +901,8 @@ body {
 
 [data-theme="dark"] #navbar {
     background-color: rgba(30, 30, 30, 0.7);
-    backdrop-filter: blur(30px);
     -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
     color: #e0e0e0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -1190,6 +1214,7 @@ body {
     cursor: pointer;
     transition: transform 0.2s;
     flex-shrink: 0;
+    -webkit-user-select: none;
     user-select: none;
 }
 
@@ -1664,6 +1689,21 @@ body {
     font-size: 1.25rem;
     margin-bottom: 8px;
     color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.pinned-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    background-color: #e74c3c;
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 4px;
+    flex-shrink: 0;
 }
 
 .article-card p {
