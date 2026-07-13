@@ -337,11 +337,23 @@ def render_article_header(meta):
         ) + '</div>'
     
     author_html = ''
-    if meta.get('author'):
-        avatar_html = ''
-        if meta.get('avatar'):
-            avatar_html = f'<img src="{meta["avatar"]}" alt="{meta["author"]}" class="meta-avatar">'
-        author_html = f'<span class="meta-author">{avatar_html}{meta["author"]}</span>'
+    authors = meta.get('author')
+    if authors:
+        if isinstance(authors, list):
+            author_items = []
+            for author in authors:
+                if isinstance(author, dict):
+                    name = author.get('name', '')
+                    avatar = author.get('avatar', '')
+                else:
+                    name = str(author)
+                    avatar = ''
+                avatar_html = f'<img src="{avatar}" alt="{name}" class="meta-avatar">' if avatar else ''
+                author_items.append(f'<span class="meta-author">{avatar_html}{name}</span>')
+            author_html = '<div class="meta-authors">' + ''.join(author_items) + '</div>'
+        else:
+            avatar_html = f'<img src="{meta["avatar"]}" alt="{authors}" class="meta-avatar">' if meta.get('avatar') else ''
+            author_html = f'<span class="meta-author">{avatar_html}{authors}</span>'
     
     return f'''
                     <div class="article-header">
@@ -497,13 +509,28 @@ def render_list_page(type, nav_items, active_path=None):
         url = article.get('url_path', article['path'])
         is_pinned = article.get('weight', 0) != 0 and type == 'blog'
         pinned_badge = '<span class="pinned-badge">置顶</span>' if is_pinned else ''
+        
+        authors = article.get('author')
+        author_html = ''
+        if authors:
+            if isinstance(authors, list):
+                author_names = []
+                for author in authors:
+                    if isinstance(author, dict):
+                        author_names.append(author.get('name', ''))
+                    else:
+                        author_names.append(str(author))
+                author_html = f'<span>{", ".join(author_names)}</span>'
+            else:
+                author_html = f'<span>{authors}</span>'
+        
         articles_html += f'''
             <a href="/{type}/{url}/" target="_blank" class="article-card">
                 <h3>{pinned_badge}{article['title']}</h3>
                 <p>{article.get('summary', '')}</p>
                 <div class="article-card-meta">
                     {f'<span>{article.get("date", "")}</span>' if article.get('date') else ''}
-                    {f'<span>{article.get("author", "")}</span>' if article.get('author') else ''}
+                    {author_html}
                 </div>
             </a>'''
     articles_html += '</div>'
