@@ -599,6 +599,13 @@ def render_page(title, content, has_sidebar=False, nav_items=None, base_path=Non
     </div>
 
     <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/lib/powershell.min.js"></script>
+    <script src="/js/lib/diff.min.js"></script>
+    <script src="/js/lib/rust.min.js"></script>
+    <script src="/js/lib/vim.min.js"></script>
+    <script src="/js/lib/cmake.min.js"></script>
+    <script src="/js/lib/yaml.min.js"></script>
+    <script src="/js/lib/dos.min.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/components/navbar.js"></script>
     <script>
