@@ -473,22 +473,33 @@ def render_list_page(type, nav_items, active_path=None):
     
     if type == 'blog':
         def parse_date(s):
-            for fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d'):
-                try:
-                    return datetime.strptime(s, fmt)
-                except (ValueError, TypeError):
-                    continue
+            if isinstance(s, datetime):
+                return s
+            if not s:
+                return datetime.min
+            if isinstance(s, str):
+                for fmt in ('%Y-%m-%d %H:%M:%S', '%Y-%m-%d %H:%M', '%Y-%m-%d', 
+                            '%Y/%m/%d %H:%M:%S', '%Y/%m/%d %H:%M', '%Y/%m/%d'):
+                    try:
+                        return datetime.strptime(s, fmt)
+                    except (ValueError, TypeError):
+                        continue
             return datetime.min
-        articles.sort(key=lambda x: parse_date(x.get('date', '')), reverse=True)
+        
+        articles.sort(key=lambda x: (x.get('weight', 0) != 0, -x.get('weight', 0), parse_date(x.get('date', ''))), reverse=True)
+    else:
+        articles.sort(key=lambda x: (x.get('weight', 0), x['title']))
     
     title = '文档' if type == 'docs' else '博客'
     
     articles_html = '<div class="article-list">'
     for article in articles:
         url = article.get('url_path', article['path'])
+        is_pinned = article.get('weight', 0) != 0 and type == 'blog'
+        pinned_badge = '<span class="pinned-badge">置顶</span>' if is_pinned else ''
         articles_html += f'''
             <a href="/{type}/{url}/" target="_blank" class="article-card">
-                <h3>{article['title']}</h3>
+                <h3>{pinned_badge}{article['title']}</h3>
                 <p>{article.get('summary', '')}</p>
                 <div class="article-card-meta">
                     {f'<span>{article.get("date", "")}</span>' if article.get('date') else ''}
