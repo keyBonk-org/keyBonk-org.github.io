@@ -587,7 +587,8 @@ def render_page(title, content, has_sidebar=False, nav_items=None, base_path=Non
     <title>{title}</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
+    <link rel="stylesheet" href="/css/github-dark.min.css" id="hljs-dark" disabled>
 </head>
 <body>
     <div id="app">
