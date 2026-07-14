@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeyBonk - KeyBonk</title>
+    <title>音频库的选择 - KeyBonk</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
@@ -77,7 +77,7 @@
                 <div class="content-sidebar" id="contentSidebar">
                     <div class="sidebar-tree" id="sidebarTree">
                         
-                        <div class="sidebar-item has-children active">
+                        <div class="sidebar-item has-children collapsed">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
@@ -92,7 +92,7 @@
                         </div>
                         </div>
                         </div>
-                        <div class="sidebar-item has-children collapsed">
+                        <div class="sidebar-item has-children">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
@@ -120,7 +120,7 @@
                                 <a href="/docs/audio-player/add-preload/" class="sidebar-item-title">预处理与播放</a>
                             </div>
                         </div>
-                        <div class="sidebar-item">
+                        <div class="sidebar-item active">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/choice/" class="sidebar-item-title">音频库的选择</a>
                             </div>
@@ -132,88 +132,248 @@
                 <div class="content-main">
                     
                     <div class="article-header">
-                        <h1>KeyBonk</h1>
+                        <h1>音频库的选择</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
-                            <span class="meta-date">2026-07-10</span>
-                            <div class="meta-tags"><span class="tag">KeyBonk</span><span class="tag">文档</span><span class="tag">readme</span></div>
+                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                            <span class="meta-date">2026-07-13</span>
+                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">比较</span></div>
                         </div>
                     </div>
                     <div class="article-content">
-                        <!-- markdownlint-disable -->
-<div align="center">
-<img alt="LOGO" src="https://github.com/keyBonk-org/KeyBonk/blob/master/resource/icon.png?raw=true" width="256" height="256" />
-<h1>发声键盘 - KeyBonk</h1>
-<p>V 1.3.0.1 （基础版）</p>
-<br>
-<div>
-    <img alt="C++" src="https://img.shields.io/badge/C++-17-%2300599C?logo=cplusplus">
-</div>
-<div>
-    <img alt="platform" src="https://img.shields.io/badge/platform-Windows-blueviolet">
-</div>
-<div>
-    <img alt="license" src="https://img.shields.io/github/license/xiaoditx/KeyBonk">
-    <img alt="commit" src="https://img.shields.io/github/commit-activity/m/xiaoditx/KeyBonk">
-</div>
-<div>
-    <img alt="stars" src="https://img.shields.io/github/stars/xiaoditx/KeyBonk?style=social">
-    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/xiaoditx/KeyBonk/total?style=social">
-</div>
-</div>
-<br>
-<div>
-    <a href="#开发信息">贡献者帮助信息</a>
-</div>
-<br>
-<!-- markdownlint-restore -->
-<p>基于曾经做过的唯一能入眼的软件“坤音键盘”的4.0版本重构的C++版本，原版公开了源码但没有传到GitHub，因为那是一个易语言项目，源码只有一个文件所以似乎没有什么开到GitHub的必要（况且GitHub默认不识别易语言，虽然我们可以手动设定但我不喜欢）</p>
-<h3 id="重构的变动">重构的变动</h3>
-<p>重构将语言换为了C++，使得运行效率得到了提升，同时抛弃了原本使用注册热键实现的极为愚蠢的方式，改用了键盘钩子作为了监视方法。</p>
-<p>这是我接触Win32开发的第一个项目，算是我练手用的了，希望各位可以喜欢</p>
-<p>另外，目前有使用Godot重构的打算，但考虑到C++版本还没写完（且我不会Godot），这个重构会暂缓。</p>
-<p>本次重构衍生出了项目<a href="https://github.com/xiaoditx/audio-player">audio-player</a>，这是一个音频库，用于播放音频文件。</p>
-<h3 id="安装">安装</h3>
-<p>软件安装包在<a href="https://github.com/xiaoditx/KeyBonk/releases">Release</a>页面，请选择你想要的版本，推荐使用最新版的前一个版本</p>
-<p>软件仅支持Windows，提供64位和32位两个版本</p>
-<h3 id="使用说明">使用说明</h3>
-<p>打开软件，软件将监测按键，默认检测<code>j</code>、<code>n</code>、<code>t</code>、<code>m</code>四个按键，按下播放对应音频</p>
-<p>音频文件在<code>./bin/default/audios</code>下，文件名为想要监测的按键的虚拟键值+“.wav”（仅支持wav）。有关虚拟键值，想要获取可以使用我在BeepMusic中使用过的工具：<a href="https://github.com/xiaoditx/BeepMusic/tree/main/tools/XD%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-T1">键值查询工具</a>。也可以查阅<a href="https://learn.microsoft.com/zh-cn/windows/win32/inputdev/virtual-key-codes">微软文档</a></p>
-<p>背景文件可更换，简单的方法是使用自己的图片替换掉<code>./bin/default/background.png</code>即可，目前测试仅证明了png有效。当前版本不支持自动检测图片尺寸，不支持颜色过滤自定义（当前版本将十进制色号13217535的颜色设为透明）</p>
-<p>可以自建一个文件夹（推荐作为<code>./bin/</code>的子文件夹），在内部自行搭建audios文件夹并自行放置background.png，想要让软件识别该文件夹，当前版本唯一有效的方法是修改config.ini，在文件末尾添加：</p>
-<pre><code class="language-text">[settings]
-lib=（你自己创建的文件夹路径比如.\bin\default）
-</code></pre>
-<h3 id="开发信息">开发信息</h3>
-<p>项目文档：<a href="./docs">docs</a></p>
-<p>软件技术栈</p>
+                        <p>一个很普遍的现象是：在目标相同的各种库中选择最适合自己项目的一个一直是一件困难的时期，本文提供了Yumo audio与Windows原生API及主流C/C++音频库进行的对比，以方便各位根据项目需求做出选择。</p>
+<h3 id="简单介绍">简单介绍</h3>
 <ul>
-<li>win32</li>
-<li>C++17</li>
-<li>GDI+</li>
-<li>~<sub>COM库</sub>~（计划引入）</li>
+<li><strong>Yumo audio</strong>：基于 Win32 的 C++17 音频库，目前只支持 WAV 播放，支持异步非阻塞播放、音频混合、暂停/静音和音量独立控制。</li>
+<li><strong>PlaySound / sndPlaySound</strong>：Windows 最简单的音频播放 API，适合播放小型 WAV 文件。</li>
+<li><strong>MCI（mciSendString / mciSendCommand）</strong>：Windows 多媒体控制接口，支持更多格式和播放控制，但不支持多线程混音。</li>
+<li><strong>waveOut</strong>：Windows 底层波形音频 API，提供更细粒度的音频流控制。（实际上，本库就是封装过的waveOut）</li>
+<li><strong>DirectSound</strong>：旧版 DirectX 音频 API，支持硬件加速和 3D 音效（已弃用，建议改用 XAudio2）。</li>
+<li><strong>XAudio2</strong>：DirectX 的现代音频 API，支持混音、音效处理和低延迟播放。（需要Windows SDK）</li>
+<li><strong>WASAPI</strong>：Windows 核心音频 API，低延迟、高精度，是微软推荐的新一代音频方案。</li>
+<li><strong>OpenAL</strong>：跨平台 3D 音频 API，支持空间音频和多声道混音。</li>
+<li><strong>SDL_mixer</strong>：SDL 的音频扩展库，跨平台，支持多种格式和混音。</li>
+<li><strong>FMOD</strong>：专业级音频引擎，功能强大，支持复杂混音和 DSP 效果，但商业使用需付费。</li>
+<li><strong>PortAudio</strong>：跨平台音频 I/O 库，专注于低延迟录音和播放。</li>
+<li><strong>SoLoud</strong>：轻量级游戏音频引擎，API 简单易用。</li>
+<li><strong>miniaudio</strong>：单文件 C 库，无依赖，支持播放、混音和 3D 音效。</li>
 </ul>
-<p>开发环境</p>
-<ul>
-<li>Windows10-x64</li>
-<li>MSYS2（MingGW64）</li>
-<li>VScode</li>
-<li>GNU Make（4.4.1）</li>
-</ul>
-<h2 id="贡献者">贡献者</h2>
-<p>感谢社区的贡献者们（其实现在并没有）</p>
-<a href="https://github.com/xiaoditx/keybonk/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=xiaoditx/keybonk" />
-</a>
-<h2 id="项目统计">项目统计</h2>
-<a href="https://www.star-history.com/#xiaoditx/keybonk&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
- </picture>
-</a>
-<p><img src="https://repobeats.axiom.co/api/embed/148eacdfa3e1268ce951923b74ab7f6ed8d8a9e7.svg" alt="Alt" title="Repobeats analytics image" /></p>
+<h3 id="功能对比表">功能对比表</h3>
+<table>
+<thead>
+<tr>
+<th>功能 / 库</th>
+<th>Yumo Audio</th>
+<th>PlaySound / sndPlaySound</th>
+<th>MCI</th>
+<th>waveOut*</th>
+<th>XAudio2</th>
+<th>WASAPI</th>
+<th>OpenAL</th>
+<th>SDL_mixer</th>
+<th>FMOD</th>
+<th>PortAudio</th>
+<th>SoLoud</th>
+<th>miniaudio</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>平台</strong></td>
+<td>Windows</td>
+<td>Windows</td>
+<td>Windows</td>
+<td>Windows</td>
+<td>Windows</td>
+<td>Windows</td>
+<td>跨平台</td>
+<td>跨平台</td>
+<td>跨平台</td>
+<td>跨平台</td>
+<td>跨平台</td>
+<td>跨平台</td>
+</tr>
+<tr>
+<td><strong>音频格式</strong></td>
+<td>WAV</td>
+<td>WAV</td>
+<td>WAV / MP3 等</td>
+<td>PCM</td>
+<td>多种</td>
+<td>PCM</td>
+<td>PCM</td>
+<td>12+ 种</td>
+<td>几乎全部</td>
+<td>PCM</td>
+<td>WAV/MP3/OGG/FLAC</td>
+<td>多种</td>
+</tr>
+<tr>
+<td><strong>异步播放</strong></td>
+<td>✅</td>
+<td>✅（SND_ASYNC）</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>音频混合</strong></td>
+<td>✅（重叠混合）</td>
+<td>❌</td>
+<td>❌（不支持多线程）</td>
+<td>需自行实现</td>
+<td>✅</td>
+<td>✅（系统级）</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>需自行实现</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>暂停/恢复</strong></td>
+<td>✅（单个音频）</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>音量控制</strong></td>
+<td>✅（单个音频）</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>静音控制</strong></td>
+<td>✅（单个音频）</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>3D 空间音效</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅（可选）</td>
+</tr>
+<tr>
+<td><strong>DSP/音效</strong></td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>❌</td>
+<td>✅</td>
+<td>❌</td>
+<td>✅</td>
+<td>基础</td>
+<td>✅</td>
+<td>❌</td>
+<td>基础</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>文件大小限制</strong></td>
+<td>无</td>
+<td>~100KB</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>学习曲线</strong></td>
+<td>低</td>
+<td>极低</td>
+<td>中</td>
+<td>高</td>
+<td>中高</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+<td>中</td>
+<td>中</td>
+<td>低</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>许可证</strong></td>
+<td>WTFPL</td>
+<td>闭源（系统 API）</td>
+<td>闭源（系统 API）</td>
+<td>闭源（系统 API）</td>
+<td>闭源（系统 API）</td>
+<td>闭源（系统 API）</td>
+<td>LGPL</td>
+<td>zlib</td>
+<td>商业（免费供个人/小团队）</td>
+<td>MIT</td>
+<td>公共领域 / zlib</td>
+<td>公共领域</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>轻量级 WAV 多音效管理</td>
+<td>简单提示音</td>
+<td>简单媒体播放</td>
+<td>底层音频控制</td>
+<td>游戏/高性能音频</td>
+<td>专业音频应用</td>
+<td>3D 游戏音效</td>
+<td>跨平台游戏</td>
+<td>专业游戏音频</td>
+<td>实时音频采集</td>
+<td>轻量级游戏</td>
+<td>极简嵌入式项目</td>
+</tr>
+</tbody>
+</table>
 
                     </div>
                 </div>
@@ -222,23 +382,11 @@ lib=（你自己创建的文件夹路径比如.\bin\default）
                     <div class="toc-title">目录</div>
                     <div class="toc-list">
                         
-                        <a href="#重构的变动" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            重构的变动
+                        <a href="#简单介绍" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            简单介绍
                         </a>
-                        <a href="#安装" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            安装
-                        </a>
-                        <a href="#使用说明" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            使用说明
-                        </a>
-                        <a href="#开发信息" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            开发信息
-                        </a>
-                        <a href="#贡献者" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            贡献者
-                        </a>
-                        <a href="#项目统计" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            项目统计
+                        <a href="#功能对比表" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            功能对比表
                         </a>
                     </div>
                 </div>

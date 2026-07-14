@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API 使用指南 - KeyBonk</title>
+    <title>开始使用 - KeyBonk</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
+    <link rel="stylesheet" href="/css/github-dark.min.css" id="hljs-dark" disabled>
 </head>
 <body>
     <div id="app">
@@ -101,7 +102,27 @@
                             
                         <div class="sidebar-item active">
                             <div class="sidebar-item-header">
-                                <a href="/docs/audio-player/usage/" class="sidebar-item-title">API 使用指南</a>
+                                <a href="/docs/audio-player/usage/" class="sidebar-item-title">开始使用</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/download/" class="sidebar-item-title">获取Yumo audio</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/make_get/" class="sidebar-item-title">为make管理的项目引入Yumo audio</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/add-preload/" class="sidebar-item-title">预处理与播放</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/choice/" class="sidebar-item-title">音频库的选择</a>
                             </div>
                         </div>
                         </div>
@@ -111,15 +132,26 @@
                 <div class="content-main">
                     
                     <div class="article-header">
-                        <h1>API 使用指南</h1>
+                        <h1>开始使用</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                            <div class="meta-authors"><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span></div>
                             <span class="meta-date">2026-07-11</span>
-                            <div class="meta-tags"><span class="tag">API</span><span class="tag">开发</span><span class="tag">集成</span></div>
+                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span></div>
                         </div>
                     </div>
                     <div class="article-content">
-                        <p>还没写！</p>
+                        <p>Yumo audio是一个基于win32 API的C++音频混合库，用于混合播放多个音频流，是KeyBonk项目的一个重要组件，详细的介绍请见<a href="http://localhost:8000/docs/audio-player/">项目简介</a>。</p>
+<p>本文档包括以下几个章节：</p>
+<ul>
+<li><a href="../download">获取Yumo audio</a></li>
+<li><a href="../make_get">为make管理的项目引入Yumo audio</a></li>
+<li><a href="../add-preload">预处理与播放</a></li>
+<li><a href="../atomic">原子类与其typedef</a></li>
+<li><a href="../status">音频播放状态管理</a></li>
+<li><a href="../global">全局状态管理</a></li>
+<li><a href="../exception">错误处理</a></li>
+</ul>
+<p>另外，考虑到可能有的用户会考虑是否选用Yumo audio，我们提供了Yumo audio和win32 API以及主流API的数据对比，用于辅助参考，参见<a href="../choice">音频库的选择</a></p>
 
                     </div>
                 </div>
@@ -160,6 +192,13 @@
     </div>
 
     <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/lib/powershell.min.js"></script>
+    <script src="/js/lib/diff.min.js"></script>
+    <script src="/js/lib/rust.min.js"></script>
+    <script src="/js/lib/vim.min.js"></script>
+    <script src="/js/lib/cmake.min.js"></script>
+    <script src="/js/lib/yaml.min.js"></script>
+    <script src="/js/lib/dos.min.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/components/navbar.js"></script>
     <script>

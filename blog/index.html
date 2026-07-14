@@ -6,7 +6,8 @@
     <title>KeyBonk - 博客</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
+    <link rel="stylesheet" href="/css/github-dark.min.css" id="hljs-dark" disabled>
 </head>
 <body>
     <div id="app">
@@ -74,6 +75,14 @@
             <div class="content-page blog-page">
                 <div class="content-main">
                     <h2>博客</h2><div class="article-list">
+            <a href="/blog/2026-7-13_keybonk_releasae/" target="_blank" class="article-card">
+                <h3>keyBonk V1.4.0.0 正式发布</h3>
+                <p>本次更新优化了软件的音频播放，从原本的Windows原生API播放全面迁移到了Yumo Audio库，实现了多音频同时播放的音频混合效果</p>
+                <div class="article-card-meta">
+                    <span>2026-07-13 17:36:34</span>
+                    <span>Yumo-sama</span>
+                </div>
+            </a>
             <a href="/blog/markdown-test/" target="_blank" class="article-card">
                 <h3>Markdown 渲染功能测试</h3>
                 <p>本文包含所有已启用的 Markdown 扩展功能，用于验证渲染效果是否正常。</p>
@@ -136,6 +145,13 @@
     </div>
 
     <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/lib/powershell.min.js"></script>
+    <script src="/js/lib/diff.min.js"></script>
+    <script src="/js/lib/rust.min.js"></script>
+    <script src="/js/lib/vim.min.js"></script>
+    <script src="/js/lib/cmake.min.js"></script>
+    <script src="/js/lib/yaml.min.js"></script>
+    <script src="/js/lib/dos.min.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/components/navbar.js"></script>
     <script>
