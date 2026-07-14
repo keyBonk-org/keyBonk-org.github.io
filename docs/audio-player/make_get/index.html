@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KeyBonk - KeyBonk</title>
+    <title>为make管理的项目引入Yumo audio - KeyBonk</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
@@ -77,7 +77,7 @@
                 <div class="content-sidebar" id="contentSidebar">
                     <div class="sidebar-tree" id="sidebarTree">
                         
-                        <div class="sidebar-item has-children active">
+                        <div class="sidebar-item has-children collapsed">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
@@ -92,7 +92,7 @@
                         </div>
                         </div>
                         </div>
-                        <div class="sidebar-item has-children collapsed">
+                        <div class="sidebar-item has-children">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
@@ -110,7 +110,7 @@
                                 <a href="/docs/audio-player/download/" class="sidebar-item-title">获取Yumo audio</a>
                             </div>
                         </div>
-                        <div class="sidebar-item">
+                        <div class="sidebar-item active">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/make_get/" class="sidebar-item-title">为make管理的项目引入Yumo audio</a>
                             </div>
@@ -132,88 +132,172 @@
                 <div class="content-main">
                     
                     <div class="article-header">
-                        <h1>KeyBonk</h1>
+                        <h1>为make管理的项目引入Yumo audio</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
-                            <span class="meta-date">2026-07-10</span>
-                            <div class="meta-tags"><span class="tag">KeyBonk</span><span class="tag">文档</span><span class="tag">readme</span></div>
+                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                            <span class="meta-date">2026-07-13</span>
+                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">make</span><span class="tag">项目</span></div>
                         </div>
                     </div>
                     <div class="article-content">
-                        <!-- markdownlint-disable -->
-<div align="center">
-<img alt="LOGO" src="https://github.com/keyBonk-org/KeyBonk/blob/master/resource/icon.png?raw=true" width="256" height="256" />
-<h1>发声键盘 - KeyBonk</h1>
-<p>V 1.3.0.1 （基础版）</p>
-<br>
-<div>
-    <img alt="C++" src="https://img.shields.io/badge/C++-17-%2300599C?logo=cplusplus">
-</div>
-<div>
-    <img alt="platform" src="https://img.shields.io/badge/platform-Windows-blueviolet">
-</div>
-<div>
-    <img alt="license" src="https://img.shields.io/github/license/xiaoditx/KeyBonk">
-    <img alt="commit" src="https://img.shields.io/github/commit-activity/m/xiaoditx/KeyBonk">
-</div>
-<div>
-    <img alt="stars" src="https://img.shields.io/github/stars/xiaoditx/KeyBonk?style=social">
-    <img alt="GitHub all releases" src="https://img.shields.io/github/downloads/xiaoditx/KeyBonk/total?style=social">
-</div>
-</div>
-<br>
-<div>
-    <a href="#开发信息">贡献者帮助信息</a>
-</div>
-<br>
-<!-- markdownlint-restore -->
-<p>基于曾经做过的唯一能入眼的软件“坤音键盘”的4.0版本重构的C++版本，原版公开了源码但没有传到GitHub，因为那是一个易语言项目，源码只有一个文件所以似乎没有什么开到GitHub的必要（况且GitHub默认不识别易语言，虽然我们可以手动设定但我不喜欢）</p>
-<h3 id="重构的变动">重构的变动</h3>
-<p>重构将语言换为了C++，使得运行效率得到了提升，同时抛弃了原本使用注册热键实现的极为愚蠢的方式，改用了键盘钩子作为了监视方法。</p>
-<p>这是我接触Win32开发的第一个项目，算是我练手用的了，希望各位可以喜欢</p>
-<p>另外，目前有使用Godot重构的打算，但考虑到C++版本还没写完（且我不会Godot），这个重构会暂缓。</p>
-<p>本次重构衍生出了项目<a href="https://github.com/xiaoditx/audio-player">audio-player</a>，这是一个音频库，用于播放音频文件。</p>
-<h3 id="安装">安装</h3>
-<p>软件安装包在<a href="https://github.com/xiaoditx/KeyBonk/releases">Release</a>页面，请选择你想要的版本，推荐使用最新版的前一个版本</p>
-<p>软件仅支持Windows，提供64位和32位两个版本</p>
-<h3 id="使用说明">使用说明</h3>
-<p>打开软件，软件将监测按键，默认检测<code>j</code>、<code>n</code>、<code>t</code>、<code>m</code>四个按键，按下播放对应音频</p>
-<p>音频文件在<code>./bin/default/audios</code>下，文件名为想要监测的按键的虚拟键值+“.wav”（仅支持wav）。有关虚拟键值，想要获取可以使用我在BeepMusic中使用过的工具：<a href="https://github.com/xiaoditx/BeepMusic/tree/main/tools/XD%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7-T1">键值查询工具</a>。也可以查阅<a href="https://learn.microsoft.com/zh-cn/windows/win32/inputdev/virtual-key-codes">微软文档</a></p>
-<p>背景文件可更换，简单的方法是使用自己的图片替换掉<code>./bin/default/background.png</code>即可，目前测试仅证明了png有效。当前版本不支持自动检测图片尺寸，不支持颜色过滤自定义（当前版本将十进制色号13217535的颜色设为透明）</p>
-<p>可以自建一个文件夹（推荐作为<code>./bin/</code>的子文件夹），在内部自行搭建audios文件夹并自行放置background.png，想要让软件识别该文件夹，当前版本唯一有效的方法是修改config.ini，在文件末尾添加：</p>
-<pre><code class="language-text">[settings]
-lib=（你自己创建的文件夹路径比如.\bin\default）
+                        <p>对于一个make管理的项目（尤指MinGW编译的C++项目），引入Yumo Audio非常轻易，可以在不直接引入源码的情况下将本库接入项目。</p>
+<p>核心逻辑是：库文件的获取直接从GitHub下载并自动解压缩</p>
+<h2 id="准备脚本">准备脚本</h2>
+<p>将以下脚本保存为<code>download_audio_lib.ps1</code>，放在项目根目录（或<code>Makefile</code>同级目录）。</p>
+<p>这个脚本几乎完全通用，不需要针对你的项目做任何改动，它负责从 GitHub 获取最新的 Release 压缩包、解压并校验库文件。</p>
+<pre><code class="language-powershell">param(
+    [string]$Repo,
+    [string]$Arch,
+    [string]$DownloadDir,
+    [string]$TargetFile
+)
+
+$ErrorActionPreference = &quot;Stop&quot;
+
+# 1. 创建下载目录
+if (-not (Test-Path $DownloadDir)) {
+    New-Item -ItemType Directory -Path $DownloadDir -Force | Out-Null
+}
+
+$zipPath = Join-Path $DownloadDir &quot;release.zip&quot;
+
+# 2. 获取最新 Release 下载 URL
+Write-Host &quot;获取最新 Release 信息...&quot; -ForegroundColor Cyan
+$apiUrl = &quot;https://api.github.com/repos/$Repo/releases/latest&quot;
+try {
+    $response = Invoke-RestMethod -Uri $apiUrl -UseBasicParsing -ErrorAction Stop
+} catch {
+    Write-Error &quot;无法获取 Release 信息: $_&quot;
+    exit 1
+}
+
+$pattern = if ($Arch -eq &quot;x64&quot;) { &quot;x64&quot; } else { &quot;x86&quot; }
+$asset = $response.assets | Where-Object { $_.name -match $pattern } | Select-Object -First 1
+if (-not $asset) {
+    Write-Error &quot;未找到匹配 '$pattern' 的压缩包&quot;
+    exit 1
+}
+
+$downloadUrl = $asset.browser_download_url
+Write-Host &quot;下载链接: $downloadUrl&quot; -ForegroundColor Gray
+
+# 3. 下载（带重试）
+$maxRetries = 3
+$attempt = 0
+$downloaded = $false
+while (-not $downloaded -and $attempt -lt $maxRetries) {
+    $attempt++
+    Write-Host &quot;下载尝试 $attempt/$maxRetries ...&quot; -ForegroundColor Yellow
+    try {
+        Invoke-WebRequest -Uri $downloadUrl -OutFile $zipPath -UseBasicParsing -ErrorAction Stop
+        $downloaded = $true
+        Write-Host &quot;下载成功&quot; -ForegroundColor Green
+    } catch {
+        Write-Warning &quot;下载失败 (尝试 $attempt): $_&quot;
+        if ($attempt -lt $maxRetries) {
+            Write-Host &quot;等待 2 秒后重试...&quot; -ForegroundColor Gray
+            Start-Sleep -Seconds 2
+        }
+    }
+}
+
+if (-not $downloaded) {
+    Write-Error &quot;下载失败，已达最大重试次数&quot;
+    exit 1
+}
+
+# 4. 验证 ZIP 完整性
+Write-Host &quot;验证 ZIP 文件完整性...&quot; -ForegroundColor Cyan
+Add-Type -AssemblyName System.IO.Compression.FileSystem -ErrorAction Stop
+try {
+    $zip = [System.IO.Compression.ZipFile]::OpenRead($zipPath)
+    $zip.Dispose()
+    Write-Host &quot;ZIP 文件有效&quot; -ForegroundColor Green
+} catch {
+    Write-Error &quot;ZIP 文件损坏或无法读取: $_&quot;
+    exit 1
+}
+
+# 5. 解压
+Write-Host &quot;解压到 $DownloadDir ...&quot; -ForegroundColor Cyan
+try {
+    Expand-Archive -Path $zipPath -DestinationPath $DownloadDir -Force -ErrorAction Stop
+    Write-Host &quot;解压完成&quot; -ForegroundColor Green
+} catch {
+    Write-Error &quot;解压失败: $_&quot;
+    exit 1
+}
+
+# 6. 删除 ZIP 文件
+Remove-Item $zipPath -Force -ErrorAction SilentlyContinue
+
+# 7. 验证目标库文件
+Write-Host &quot;验证库文件 $TargetFile ...&quot; -ForegroundColor Cyan
+if (-not (Test-Path $TargetFile)) {
+    Write-Error &quot;库文件不存在: $TargetFile&quot;
+    exit 1
+}
+
+# 使用 ar 检查格式（需在 PATH 中）
+$ar = &quot;ar.exe&quot;
+$test = &amp; $ar t $TargetFile 2&gt;&amp;1
+if ($LASTEXITCODE -ne 0) {
+    Write-Error &quot;库文件格式无效 (ar t 失败): $($test -join &quot;`n&quot;)&quot;
+    exit 1
+}
+
+Write-Host &quot;库文件验证通过&quot; -ForegroundColor Green
+Write-Host &quot;所有操作完成！&quot; -ForegroundColor Green
+exit 0
 </code></pre>
-<h3 id="开发信息">开发信息</h3>
-<p>项目文档：<a href="./docs">docs</a></p>
-<p>软件技术栈</p>
-<ul>
-<li>win32</li>
-<li>C++17</li>
-<li>GDI+</li>
-<li>~<sub>COM库</sub>~（计划引入）</li>
-</ul>
-<p>开发环境</p>
-<ul>
-<li>Windows10-x64</li>
-<li>MSYS2（MingGW64）</li>
-<li>VScode</li>
-<li>GNU Make（4.4.1）</li>
-</ul>
-<h2 id="贡献者">贡献者</h2>
-<p>感谢社区的贡献者们（其实现在并没有）</p>
-<a href="https://github.com/xiaoditx/keybonk/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=xiaoditx/keybonk" />
-</a>
-<h2 id="项目统计">项目统计</h2>
-<a href="https://www.star-history.com/#xiaoditx/keybonk&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=xiaoditx/keybonk&type=date&legend=top-left" />
- </picture>
-</a>
-<p><img src="https://repobeats.axiom.co/api/embed/148eacdfa3e1268ce951923b74ab7f6ed8d8a9e7.svg" alt="Alt" title="Repobeats analytics image" /></p>
+<h2 id="修改makefile">修改makefile</h2>
+<p>接着，准备makefile，确保makefile与刚刚的powershell脚本在同级目录下：</p>
+<pre><code class="language-makefile"># （可省略的）架构判断
+# 主要针对兼容64+32位的项目
+ARCH ?= 64
+ifeq ($(ARCH),32)
+ARCH_TEXT= x86
+else
+ARCH_TEXT= x64
+endif
+#你的构建路径（请根据实际修改）
+BUILD_DIR := ...
+# 库文件下载路径
+LIB_DOWNLOAD_PATH := $(BUILD_DIR)/libs
+# GitHub仓库名
+AUDIO_LIB_REPO    := keybonk-org/audio-player
+# 库文件理论实际文件名
+AUDIO_LIB := $(LIB_DOWNLOAD_PATH)/audioPlayer_$(ARCH_TEXT).a
+
+$(AUDIO_LIB):
+	@echo 正在下载/更新 audio-player 库 ...
+	@powershell -ExecutionPolicy Bypass -File &quot;download_audio_lib.ps1&quot; -Repo &quot;$(AUDIO_LIB_REPO)&quot; -Arch &quot;$(ARCH_TEXT)&quot; -DownloadDir &quot;$(LIB_DOWNLOAD_PATH)&quot; -TargetFile &quot;$(AUDIO_LIB)&quot;
+	@echo 库已就绪。
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>如果你希望提供一个单独的 update 目标来手动更新库，只需将上述规则中的命令复制到<code>update</code>目标的命令中即可，比如：</p>
+<pre><code class="language-makefile">update:
+	@echo 正在下载/更新 audio-player 库 ...
+	@powershell -ExecutionPolicy Bypass -File &quot;download_audio_lib.ps1&quot; -Repo &quot;$(AUDIO_LIB_REPO)&quot; -Arch &quot;$(ARCH_TEXT)&quot; -DownloadDir &quot;$(LIB_DOWNLOAD_PATH)&quot; -TargetFile &quot;$(AUDIO_LIB)&quot;
+	@echo 库已就绪。
+</code></pre>
+<p>不过你也可以将<code>%(AUDIO_LIB)</code>作为<code>update</code>的依赖，比如：</p>
+<pre><code class="language-makefile">update: $(AUDIO_LIB)
+	@echo 更新完成。
+</code></pre>
+</div>
+<h2 id="链接">链接</h2>
+<p>现在，将<code>$(AUDIO_LIB)</code>设置为项目编译的最终文件的一个依赖项（通常是<code>.exe</code>或<code>.dll</code>），并在链接命令中引用它。如果你在链接时使用<code>$^</code> 自动展开所有依赖，那么无需额外改动链接命令。</p>
+<p>示例：</p>
+<pre><code class="language-makefile"># 链接 
+$(BIN): $(CXX_OBJS) $(RES_OBJ) $(AUDIO_LIB) | $(BUILD_DIR)/bin/default
+	@echo 正在链接生成可执行文件 $@ ...
+	@$(CXX) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+</code></pre>
+<p>Yumo Audio 底层依赖三个 Windows 多媒体库，链接时需要显式添加：<code>-lwinmm -lmsacm32 -lcomdlg32</code>，你可以将它们添加到你自己makefile中形似于<code>LDFLAGS</code>或<code>LDLIBS</code>的变量中，比如：</p>
+<pre><code class="language-makefile">LDFLAGS += -lwinmm -lmsacm32 -lcomdlg32
+</code></pre>
 
                     </div>
                 </div>
@@ -222,23 +306,14 @@ lib=（你自己创建的文件夹路径比如.\bin\default）
                     <div class="toc-title">目录</div>
                     <div class="toc-list">
                         
-                        <a href="#重构的变动" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            重构的变动
+                        <a href="#准备脚本" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            准备脚本
                         </a>
-                        <a href="#安装" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            安装
+                        <a href="#修改makefile" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            修改makefile
                         </a>
-                        <a href="#使用说明" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            使用说明
-                        </a>
-                        <a href="#开发信息" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            开发信息
-                        </a>
-                        <a href="#贡献者" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            贡献者
-                        </a>
-                        <a href="#项目统计" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            项目统计
+                        <a href="#链接" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            链接
                         </a>
                     </div>
                 </div>

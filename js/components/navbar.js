@@ -31,6 +31,17 @@ const Navbar = (function() {
         if (menuIcon) {
             menuIcon.src = '/imgs/UI/' + (theme === 'dark' ? 'menu_dark.png' : 'menu.png');
         }
+		const lightStyle = document.getElementById('hljs-light');
+		const darkStyle = document.getElementById('hljs-dark');
+		if (lightStyle && darkStyle) {
+			if (theme === 'dark') {
+				lightStyle.disabled = true;
+				darkStyle.disabled = false;
+			} else {
+				lightStyle.disabled = false;
+				darkStyle.disabled = true;
+			}
+		}
     }
 
     function normalizePath(path) {
