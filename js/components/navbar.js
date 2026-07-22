@@ -78,6 +78,22 @@ const Navbar = (function() {
             `;
         }).join('');
 
+        let sidebarHtml = '';
+        const sidebarTree = document.getElementById('sidebarTree');
+        const isDocsPage = currentPage.startsWith('/docs/');
+        if (isDocsPage && sidebarTree) {
+            const sidebarContent = sidebarTree.innerHTML;
+            sidebarHtml = `
+                <li class="mobile-menu-divider"></li>
+                <li class="mobile-menu-section-title">文档导航</li>
+                <li class="mobile-sidebar">
+                    <div class="sidebar-tree mobile-sidebar-tree">
+                        ${sidebarContent}
+                    </div>
+                </li>
+            `;
+        }
+
         return `
             <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
             <ul class="mobile-menu" id="mobileMenu">
@@ -88,6 +104,7 @@ const Navbar = (function() {
                     </div>
                 </li>
                 ${linksHtml}
+                ${sidebarHtml}
             </ul>
         `;
     }
@@ -176,6 +193,10 @@ const Navbar = (function() {
             menu = document.getElementById('mobileMenu');
 
             overlay.addEventListener('click', closeMobileMenu);
+            
+            if (typeof Search !== 'undefined') {
+                Search.init();
+            }
         }
 
         menu.classList.add('active');

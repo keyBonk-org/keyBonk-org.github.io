@@ -134,10 +134,30 @@
                     <div class="article-header">
                         <h1>为make管理的项目引入Yumo audio</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
-                            <span class="meta-date">2026-07-13</span>
-                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">make</span><span class="tag">项目</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                                <span class="meta-date">2026-07-13</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">make</span><span class="tag">项目</span></div>
+                            </div>
+                            
+                            <button class="meta-expand-btn" onclick="toggleMetaPopup(this)">...</button>
                         </div>
+                        
+                    <div class="meta-popup" id="metaPopup">
+                        <div class="meta-popup-overlay" onclick="closeMetaPopup()"></div>
+                        <div class="meta-popup-content">
+                            <div class="meta-popup-header">
+                                <h4>文章信息</h4>
+                                <button class="meta-popup-close" onclick="closeMetaPopup()">×</button>
+                            </div>
+                            <div class="meta-popup-body">
+                                <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                                <div class="meta-popup-date">2026-07-13</div>
+                                <div class="full-meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">make</span><span class="tag">项目</span></div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     <div class="article-content">
                         <p>对于一个make管理的项目（尤指MinGW编译的C++项目），引入Yumo Audio非常轻易，可以在不直接引入源码的情况下将本库接入项目。</p>
@@ -365,6 +385,26 @@ $(BIN): $(CXX_OBJS) $(RES_OBJ) $(AUDIO_LIB) | $(BUILD_DIR)/bin/default
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

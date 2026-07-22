@@ -157,6 +157,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

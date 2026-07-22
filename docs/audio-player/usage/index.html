@@ -134,10 +134,15 @@
                     <div class="article-header">
                         <h1>开始使用</h1>
                         <div class="article-meta">
-                            <div class="meta-authors"><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span></div>
-                            <span class="meta-date">2026-07-11</span>
-                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span></div>
+                            <div class="meta-truncated">
+                                
+                                <div class="meta-authors"><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span></div>
+                                <span class="meta-date">2026-07-11</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <p>Yumo audio是一个基于win32 API的C++音频混合库，用于混合播放多个音频流，是KeyBonk项目的一个重要组件，详细的介绍请见<a href="http://localhost:8000/docs/audio-player/">项目简介</a>。</p>
@@ -204,6 +209,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

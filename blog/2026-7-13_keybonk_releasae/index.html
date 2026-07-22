@@ -78,10 +78,15 @@
                     <div class="article-header">
                         <h1>keyBonk V1.4.0.0 正式发布</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
-                            <span class="meta-date">2026-07-13 17:36:34</span>
-                            <div class="meta-tags"><span class="tag">发布</span><span class="tag">keyBonk</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                                <span class="meta-date">2026-07-13 17:36:34</span>
+                                <div class="meta-tags"><span class="tag">发布</span><span class="tag">keyBonk</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <p>KeyBonk 1.4.0.0版本正式发布！</p>
@@ -147,6 +152,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

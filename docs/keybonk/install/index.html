@@ -134,10 +134,15 @@
                     <div class="article-header">
                         <h1>安装指南</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
-                            <span class="meta-date">2026-07-10</span>
-                            <div class="meta-tags"><span class="tag">安装</span><span class="tag">入门</span><span class="tag">配置</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                                <span class="meta-date">2026-07-10</span>
+                                <div class="meta-tags"><span class="tag">安装</span><span class="tag">入门</span><span class="tag">配置</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <p>没写</p>
@@ -193,6 +198,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

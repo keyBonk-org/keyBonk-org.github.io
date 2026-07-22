@@ -134,10 +134,15 @@
                     <div class="article-header">
                         <h1>Yumo audio文档</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
-                            <span class="meta-date">2026-07-11</span>
-                            <div class="meta-tags"><span class="tag">Yumo Audio</span><span class="tag">文档</span><span class="tag">readme</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                                <span class="meta-date">2026-07-11</span>
+                                <div class="meta-tags"><span class="tag">Yumo Audio</span><span class="tag">文档</span><span class="tag">readme</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <h1>Yumo Audio</h1>
@@ -286,6 +291,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

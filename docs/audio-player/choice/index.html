@@ -134,10 +134,15 @@
                     <div class="article-header">
                         <h1>音频库的选择</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
-                            <span class="meta-date">2026-07-13</span>
-                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">比较</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
+                                <span class="meta-date">2026-07-13</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">比较</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <p>一个很普遍的现象是：在目标相同的各种库中选择最适合自己项目的一个一直是一件困难的时期，本文提供了Yumo audio与Windows原生API及主流C/C++音频库进行的对比，以方便各位根据项目需求做出选择。</p>
@@ -438,6 +443,26 @@
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

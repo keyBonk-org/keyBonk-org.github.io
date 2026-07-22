@@ -1,8 +1,8 @@
 const Search = (function() {
     let searchIndex = [];
     let isLoading = false;
-    let searchInput = null;
-    let resultsContainer = null;
+    let searchInputs = [];
+    let resultsContainers = [];
     let debounceTimer = null;
 
     async function loadIndex() {
@@ -141,18 +141,17 @@ const Search = (function() {
         return results.sort((a, b) => b.score - a.score).slice(0, 15);
     }
 
-    function renderResults(results) {
-        if (!resultsContainer) return;
+    function renderResults(results, container, query) {
+        if (!container) return;
         
         if (results.length === 0) {
-            resultsContainer.innerHTML = '<div class="search-no-results">未找到匹配结果</div>';
-            resultsContainer.classList.add('active');
+            container.innerHTML = '<div class="search-no-results">未找到匹配结果</div>';
+            container.classList.add('active');
             return;
         }
         
         let html = '';
         let currentPath = '';
-        const query = searchInput ? searchInput.value : '';
         
         for (let i = 0; i < results.length; i++) {
             const item = results[i];
@@ -164,7 +163,7 @@ const Search = (function() {
             
             html += `
                 <li>
-                    <a href="${item.url}" class="${i === 0 ? 'search-active' : ''}" data-index="${i}">
+                    <a href="${item.url}" class="${i === 0 ? 'search-active' : ''}" data-index="${i}" onclick="Search.hideAllResults()">
                         <div class="search-title">${highlightMatch(item.title, query)}</div>
                         ${item.excerpt ? `<div class="search-excerpt">${item.excerpt}</div>` : ''}
                     </a>
@@ -172,14 +171,20 @@ const Search = (function() {
             `;
         }
         
-        resultsContainer.innerHTML = html;
-        resultsContainer.classList.add('active');
+        container.innerHTML = html;
+        container.classList.add('active');
     }
 
-    function hideResults() {
-        if (resultsContainer) {
-            resultsContainer.classList.remove('active');
+    function hideResults(container) {
+        if (container) {
+            container.classList.remove('active');
         }
+    }
+
+    function hideAllResults() {
+        resultsContainers.forEach(container => {
+            container.classList.remove('active');
+        });
     }
 
     function getNextLi(currentLi) {
@@ -198,86 +203,113 @@ const Search = (function() {
         return prev;
     }
 
+    function createResultsContainer(searchBox) {
+        const container = document.createElement('ul');
+        container.className = 'search-results';
+        container.setAttribute('aria-label', '搜索结果');
+        searchBox.appendChild(container);
+        return container;
+    }
+
     async function handleSearch(e) {
         const query = e.target.value;
+        const searchBox = e.target.closest('.search-box');
+        const container = searchBox ? searchBox.querySelector('.search-results') : null;
         
         if (debounceTimer) clearTimeout(debounceTimer);
         
         debounceTimer = setTimeout(async () => {
             await loadIndex();
             const results = search(query);
-            renderResults(results);
+            
+            resultsContainers.forEach(c => {
+                c.classList.remove('active');
+            });
+            
+            if (container) {
+                renderResults(results, container, query);
+            }
         }, 200);
     }
 
     function init() {
-        searchInput = document.querySelector('.search-box input');
-        if (!searchInput) return;
+        const inputs = document.querySelectorAll('.search-box input');
+        searchInputs = Array.from(inputs);
         
-        const searchBox = searchInput.parentElement;
-        resultsContainer = document.createElement('ul');
-        resultsContainer.className = 'search-results';
-        resultsContainer.setAttribute('aria-label', '搜索结果');
-        searchBox.appendChild(resultsContainer);
-        
-        searchInput.addEventListener('input', handleSearch);
-        
-        document.addEventListener('click', (e) => {
-            if (!searchBox.contains(e.target)) {
-                hideResults();
+        searchInputs.forEach(input => {
+            const searchBox = input.parentElement;
+            let container = searchBox.querySelector('.search-results');
+            if (!container) {
+                container = createResultsContainer(searchBox);
+                resultsContainers.push(container);
+            } else {
+                resultsContainers.push(container);
             }
-        });
-        
-        searchInput.addEventListener('keydown', (e) => {
-            if (!resultsContainer || !resultsContainer.classList.contains('active')) return;
             
-            const activeLink = resultsContainer.querySelector('.search-active');
-            const items = resultsContainer.querySelectorAll('li');
+            input.addEventListener('input', handleSearch);
             
-            if (e.key === 'ArrowDown') {
-                e.preventDefault();
-                if (activeLink) {
-                    activeLink.classList.remove('search-active');
-                    const currentLi = activeLink.parentElement;
-                    const nextLi = getNextLi(currentLi);
-                    if (nextLi) {
-                        nextLi.querySelector('a').classList.add('search-active');
-                    } else {
+            input.addEventListener('keydown', (e) => {
+                if (!container || !container.classList.contains('active')) return;
+                
+                const activeLink = container.querySelector('.search-active');
+                const items = container.querySelectorAll('li');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (activeLink) {
+                        activeLink.classList.remove('search-active');
+                        const currentLi = activeLink.parentElement;
+                        const nextLi = getNextLi(currentLi);
+                        if (nextLi) {
+                            nextLi.querySelector('a').classList.add('search-active');
+                        } else {
+                            items[0].querySelector('a').classList.add('search-active');
+                        }
+                    } else if (items.length > 0) {
                         items[0].querySelector('a').classList.add('search-active');
                     }
-                } else if (items.length > 0) {
-                    items[0].querySelector('a').classList.add('search-active');
-                }
-            } else if (e.key === 'ArrowUp') {
-                e.preventDefault();
-                if (activeLink) {
-                    activeLink.classList.remove('search-active');
-                    const currentLi = activeLink.parentElement;
-                    const prevLi = getPrevLi(currentLi);
-                    if (prevLi) {
-                        prevLi.querySelector('a').classList.add('search-active');
-                    } else {
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (activeLink) {
+                        activeLink.classList.remove('search-active');
+                        const currentLi = activeLink.parentElement;
+                        const prevLi = getPrevLi(currentLi);
+                        if (prevLi) {
+                            prevLi.querySelector('a').classList.add('search-active');
+                        } else {
+                            items[items.length - 1].querySelector('a').classList.add('search-active');
+                        }
+                    } else if (items.length > 0) {
                         items[items.length - 1].querySelector('a').classList.add('search-active');
                     }
-                } else if (items.length > 0) {
-                    items[items.length - 1].querySelector('a').classList.add('search-active');
+                } else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const active = container.querySelector('.search-active');
+                    if (active) {
+                        active.click();
+                    } else if (items.length > 0) {
+                        items[0].querySelector('a').click();
+                    }
+                } else if (e.key === 'Escape') {
+                    hideResults(container);
                 }
-            } else if (e.key === 'Enter') {
-                e.preventDefault();
-                const active = resultsContainer.querySelector('.search-active');
-                if (active) {
-                    active.click();
-                } else if (items.length > 0) {
-                    items[0].querySelector('a').click();
+            });
+        });
+        
+        document.addEventListener('click', (e) => {
+            const searchBox = e.target.closest('.search-box');
+            resultsContainers.forEach(container => {
+                const box = container.parentElement;
+                if (box !== searchBox) {
+                    hideResults(container);
                 }
-            } else if (e.key === 'Escape') {
-                hideResults();
-            }
+            });
         });
     }
 
     return {
         init,
-        search
+        search,
+        hideAllResults
     };
 })();

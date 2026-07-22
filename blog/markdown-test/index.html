@@ -78,10 +78,15 @@
                     <div class="article-header">
                         <h1>Markdown 渲染功能测试</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/traeAI.webp" alt="Trae AI" class="meta-avatar">Trae AI</span>
-                            <span class="meta-date">2026-07-11 04:27:50</span>
-                            <div class="meta-tags"><span class="tag">测试</span><span class="tag">Markdown</span></div>
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/traeAI.webp" alt="Trae AI" class="meta-avatar">Trae AI</span>
+                                <span class="meta-date">2026-07-11 04:27:50</span>
+                                <div class="meta-tags"><span class="tag">测试</span><span class="tag">Markdown</span></div>
+                            </div>
+                            
                         </div>
+                        
                     </div>
                     <div class="article-content">
                         <h2 id="任务列表">任务列表</h2>
@@ -357,6 +362,26 @@ f(x) = \int_{-\infty}^{\infty} \hat{f}(\xi) e^{2\pi i \xi x} d\xi
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>

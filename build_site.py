@@ -331,12 +331,18 @@ def render_article_header(meta):
         return ''
     
     tags_html = ''
+    full_tags_html = ''
     if meta.get('tags'):
+        tags_list = meta['tags']
         tags_html = '<div class="meta-tags">' + ''.join(
-            f'<span class="tag">{tag}</span>' for tag in meta['tags']
+            f'<span class="tag">{tag}</span>' for tag in tags_list
+        ) + '</div>'
+        full_tags_html = '<div class="full-meta-tags">' + ''.join(
+            f'<span class="tag">{tag}</span>' for tag in tags_list
         ) + '</div>'
     
     author_html = ''
+    full_author_html = ''
     authors = meta.get('author')
     if authors:
         if isinstance(authors, list):
@@ -351,18 +357,52 @@ def render_article_header(meta):
                 avatar_html = f'<img src="{avatar}" alt="{name}" class="meta-avatar">' if avatar else ''
                 author_items.append(f'<span class="meta-author">{avatar_html}{name}</span>')
             author_html = '<div class="meta-authors">' + ''.join(author_items) + '</div>'
+            full_author_html = '<div class="full-meta-authors">' + ''.join(author_items) + '</div>'
         else:
             avatar_html = f'<img src="{meta["avatar"]}" alt="{authors}" class="meta-avatar">' if meta.get('avatar') else ''
             author_html = f'<span class="meta-author">{avatar_html}{authors}</span>'
+            full_author_html = f'<span class="meta-author">{avatar_html}{authors}</span>'
+    
+    has_extra = (isinstance(authors, list) and len(authors) > 2) or (meta.get('tags') and len(meta['tags']) > 3)
+    
+    meta_content = f'''
+                                {author_html}
+                                {f'<span class="meta-date">{meta.get("date", "")}</span>' if meta.get('date') else ''}
+                                {tags_html}'''
+    
+    expand_btn_html = ''
+    if has_extra:
+        expand_btn_html = f'''
+                            <button class="meta-expand-btn" onclick="toggleMetaPopup(this)">...</button>'''
+    
+    popup_html = ''
+    if has_extra:
+        popup_html = f'''
+                    <div class="meta-popup" id="metaPopup">
+                        <div class="meta-popup-overlay" onclick="closeMetaPopup()"></div>
+                        <div class="meta-popup-content">
+                            <div class="meta-popup-header">
+                                <h4>文章信息</h4>
+                                <button class="meta-popup-close" onclick="closeMetaPopup()">×</button>
+                            </div>
+                            <div class="meta-popup-body">
+                                {full_author_html}
+                                {f'<div class="meta-popup-date">{meta.get("date", "")}</div>' if meta.get('date') else ''}
+                                {full_tags_html}
+                            </div>
+                        </div>
+                    </div>'''
     
     return f'''
                     <div class="article-header">
                         <h1>{meta.get('title', '未命名文章')}</h1>
                         <div class="article-meta">
-                            {author_html}
-                            {f'<span class="meta-date">{meta.get("date", "")}</span>' if meta.get('date') else ''}
-                            {tags_html}
+                            <div class="meta-truncated">
+                                {meta_content}
+                            </div>
+                            {expand_btn_html}
                         </div>
+                        {popup_html}
                     </div>'''
 
 def scan_directory(base_path, current_path=""):
@@ -579,6 +619,31 @@ def render_page(title, content, has_sidebar=False, nav_items=None, base_path=Non
                 {toc_html}
             </div>'''
     
+    meta_script = '''    <script>
+        Navbar.init();
+        hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
+    </script>'''
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -609,10 +674,7 @@ def render_page(title, content, has_sidebar=False, nav_items=None, base_path=Non
     <script src="/js/lib/dos.min.js"></script>
     <script src="/js/search.js"></script>
     <script src="/js/components/navbar.js"></script>
-    <script>
-        Navbar.init();
-        hljs.highlightAll();
-    </script>
+{meta_script}
 </body>
 </html>'''
     

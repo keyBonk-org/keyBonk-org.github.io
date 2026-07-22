@@ -134,17 +134,43 @@
                     <div class="article-header">
                         <h1>预处理与播放</h1>
                         <div class="article-meta">
-                            <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
-                            <span class="meta-date">2026-07-13</span>
-                            <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">播放</span><span class="tag">预处理</span><span class="tag">接口</span></div>
+                            <div class="meta-truncated">
+                                
+                                <div class="meta-authors"><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span></div>
+                                <span class="meta-date">2026-07-21</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">播放</span><span class="tag">预处理</span><span class="tag">接口</span></div>
+                            </div>
+                            
+                            <button class="meta-expand-btn" onclick="toggleMetaPopup(this)">...</button>
                         </div>
+                        
+                    <div class="meta-popup" id="metaPopup">
+                        <div class="meta-popup-overlay" onclick="closeMetaPopup()"></div>
+                        <div class="meta-popup-content">
+                            <div class="meta-popup-header">
+                                <h4>文章信息</h4>
+                                <button class="meta-popup-close" onclick="closeMetaPopup()">×</button>
+                            </div>
+                            <div class="meta-popup-body">
+                                <div class="full-meta-authors"><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span></div>
+                                <div class="meta-popup-date">2026-07-21</div>
+                                <div class="full-meta-tags"><span class="tag">Yumo audio</span><span class="tag">开发</span><span class="tag">播放</span><span class="tag">预处理</span><span class="tag">接口</span></div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     <div class="article-content">
                         <p>下面是与音频库播放功能直接相关的几个核心接口，我们先来粗略的看一遍：</p>
-<pre><code class="language-cpp">size_t preloadAudio(const wchar_t *filename, readySign *ready = nullptr);
-size_t addAudio(size_t preloadedId, float volume = 1.0f);
-void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId = nullptr, readySign *ready = nullptr);
+<pre><code class="language-cpp">namespace yumo{
+	size_t preloadAudio(const wchar_t *filename, readySign *ready = nullptr);
+	size_t addAudio(size_t preloadedId, float volume = 1.0f);
+	void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId = nullptr, readySign *ready = nullptr);
+}
 </code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>库内所有内容都在<code>yumo</code>命名空间下，虽然很少，但仍不推荐<code>using namespace yumo;</code>，因为如果你还用了我们开发的其他库（虽然只是计划中的所以你现在肯定没用过）就会发现这些库的命名空间全部都是<code>yumo</code>，很有可能会有冲突发生</p>
+</div>
 <p>下面我们将对它们逐一讲解。</p>
 <h2 id="预处理音频">预处理音频</h2>
 <p>首先是预处理函数<code>preloadAudio</code>，函数会启动一个读取线程并返回该音频在队列中的ID，读取线程读取并解析指定音频，将其加入到已预处理音频队列。</p>
@@ -160,10 +186,14 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
 <p>宽字符字符串，指定需要预处理的音频文件名。</p>
 <p><code>[out,optional] ready</code></p>
 <p>类型：<strong>readySign*</strong></p>
-<p>函数会将其指向的对象赋为<code>false</code>并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/#%E5%AE%8C%E6%88%90%E6%A0%87%E5%BF%97">完成标志</a>。</p>
+<p>函数会将其指向的对象赋为<code>false</code>然后启动后台线程并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/#%E5%AE%8C%E6%88%90%E6%A0%87%E5%BF%97">完成标志</a>。</p>
 <h3 id="返回值">返回值</h3>
 <p>类型：<strong>size_t</strong></p>
 <p>预处理后的音频在队列中的ID。</p>
+<h3 id="示例">示例</h3>
+<pre><code class="language-cpp">yumo::readySign ready(false);
+size_t preloadId = yumo::preloadAudio(L&quot;./test.wav&quot;, &amp;ready);
+</code></pre>
 <h2 id="播放预处理后的音频">播放预处理后的音频</h2>
 <p>预处理后音频会得到一个ID，这是预处理ID，根据预处理ID，我们就可以将其对应的已经经过预处理的音频加入到播放队列。</p>
 <h3 id="原型-2">原型</h3>
@@ -182,9 +212,14 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
 <h3 id="返回值-2">返回值</h3>
 <p>类型：<strong>size_t</strong></p>
 <p>音频加入队列后创建的播放实例的ID。</p>
+<h3 id="示例-2">示例</h3>
+<pre><code class="language-cpp">yumo::readySign ready(false);
+size_t preloadId = yumo::preloadAudio(L&quot;./test.wav&quot;, &amp;ready);
+size_t instanceId = yumo::addAudio(preloadId, 0.7f);
+</code></pre>
 <h2 id="无预处理播放">无预处理播放</h2>
 <p>当音频较小或在一定时间内只需播放较少的次数时，可以直接忽略预处理，使用<code>addAudio</code>的一个字符串重载来直接从文件添加音频到播放队列而非预处理ID。</p>
-<p>该重载会激活一个读取线程，自动完成预处理与播放，播放完毕后会将预处理音频从预处理队列移除。</p>
+<p>该重载会激活一个读取线程，自动完成预处理与播放，播放完毕后会将预处理音频从预处理队列移除，因此此方式只适用于一次性播放</p>
 <h3 id="原型-3">原型</h3>
 <pre><code class="language-cpp">void addAudio(
 	const wchar_t *filename,
@@ -201,10 +236,22 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
 <p>音频开始播放时的初始音量，最大为1，最小为0，默认为1。</p>
 <p><code>[out,optional] instanceId</code></p>
 <p>类型：<strong>size_t*</strong></p>
-<p>一个指针，用于获取播放示例ID，如果音频足够长且需要一些诸如音量调整的精细操作，则需要接受ID。</p>
+<p>一个指针，用于获取播放实例ID，如果音频足够长且需要一些诸如音量调整的精细操作，则需要接受ID。</p>
 <p><code>[out,optional] ready</code></p>
 <p>类型：<strong>readySign*</strong></p>
 <p>函数会将其指向的对象赋为<code>false</code>并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/#%E5%AE%8C%E6%88%90%E6%A0%87%E5%BF%97">完成标志</a>。</p>
+<h3 id="示例-3">示例</h3>
+<pre><code class="language-cpp">// 可选的内容
+size_t instanceId = 0;
+yumo::readySign ready(false);
+
+yumo::addAudio(
+	L&quot;./test.wav&quot;,
+	0.8f,
+	&amp;instanceId,
+	&amp;ready
+);
+</code></pre>
 
                     </div>
                 </div>
@@ -225,6 +272,9 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
                         <a href="#返回值" class="toc-link toc-level-3" style="padding-left: 12px;">
                             返回值
                         </a>
+                        <a href="#示例" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            示例
+                        </a>
                         <a href="#播放预处理后的音频" class="toc-link toc-level-2" style="padding-left: 0px;">
                             播放预处理后的音频
                         </a>
@@ -237,6 +287,9 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
                         <a href="#返回值-2" class="toc-link toc-level-3" style="padding-left: 12px;">
                             返回值
                         </a>
+                        <a href="#示例-2" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            示例
+                        </a>
                         <a href="#无预处理播放" class="toc-link toc-level-2" style="padding-left: 0px;">
                             无预处理播放
                         </a>
@@ -245,6 +298,9 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
                         </a>
                         <a href="#参数-3" class="toc-link toc-level-3" style="padding-left: 12px;">
                             参数
+                        </a>
+                        <a href="#示例-3" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            示例
                         </a>
                     </div>
                 </div>
@@ -296,6 +352,26 @@ void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId =
     <script>
         Navbar.init();
         hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
     </script>
 </body>
 </html>
