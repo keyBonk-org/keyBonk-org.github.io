@@ -11,7 +11,7 @@ tags: ["Yumo audio", "开发"]
 weight: 1
 ---
 
-Yumo audio是一个基于win32 API的C++音频混合库，用于混合播放多个音频流，是KeyBonk项目的一个重要组件，详细的介绍请见[项目简介](http://localhost:8000/docs/audio-player/)。
+Yumo audio是一个基于win32 API的C++音频混合库，用于混合播放多个音频流，是<a href="https://github.com/keybonk-org/keyBonk" target="_blank">KeyBonk</a>项目的一个重要组件，详细的介绍请见[项目简介](..)。
 
 本文档包括以下几个章节：
 
