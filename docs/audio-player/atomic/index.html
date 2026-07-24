@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>安装指南 - KeyBonk</title>
+    <title>原子类与其typedef - KeyBonk</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
@@ -72,12 +72,12 @@
         </nav>
         <main id="main-content">
             
-            <div class="content-page">
+            <div class="content-page content-page-has-toc">
                 
                 <div class="content-sidebar" id="contentSidebar">
                     <div class="sidebar-tree" id="sidebarTree">
                         
-                        <div class="sidebar-item has-children">
+                        <div class="sidebar-item has-children collapsed">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
@@ -85,14 +85,14 @@
                             
                         <div class="sidebar-children">
                             
-                        <div class="sidebar-item active">
+                        <div class="sidebar-item">
                             <div class="sidebar-item-header">
                                 <a href="/docs/keybonk/install/" class="sidebar-item-title">安装指南</a>
                             </div>
                         </div>
                         </div>
                         </div>
-                        <div class="sidebar-item has-children collapsed">
+                        <div class="sidebar-item has-children">
                             <div class="sidebar-item-header">
                                 <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
                                 <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
@@ -120,7 +120,7 @@
                                 <a href="/docs/audio-player/add-preload/" class="sidebar-item-title">预处理与播放</a>
                             </div>
                         </div>
-                        <div class="sidebar-item">
+                        <div class="sidebar-item active">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/atomic/" class="sidebar-item-title">原子类与其typedef</a>
                             </div>
@@ -137,24 +137,154 @@
                 <div class="content-main">
                     
                     <div class="article-header">
-                        <h1>安装指南</h1>
+                        <h1>原子类与其typedef</h1>
                         <div class="article-meta">
                             <div class="meta-truncated">
                                 
                                 <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
-                                <span class="meta-date">2026-07-10</span>
-                                <div class="meta-tags"><span class="tag">安装</span><span class="tag">入门</span><span class="tag">配置</span></div>
+                                <span class="meta-date">2026-07-24</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">原子类</span><span class="tag">typedef</span></div>
                             </div>
                             
                         </div>
                         
                     </div>
                     <div class="article-content">
-                        <p>没写</p>
+                        <p>前面的章节中，我们介绍了<code>preloadAudio</code>等一众函数，考虑到一般的窗口程序都不希望一个加载过程长时间阻塞导致无法处理事件循环，库对于长耗时调用往往采取新建线程的方式，由调用方传入标志变量，在完成时以此通知。</p>
+<p>不过标准的指针在编译器优化和机器高速缓存的双重作用下会出现非实时更新，导致看不到其他线程的修改，<code>volatile</code>虽然能避免编译器的优化，但无法避免机器缓存，因此需要原子类辅助。</p>
+<p>本库提供了改进的原子类，重载了赋值运算符并提供了隐式转换，使之看上去像是一个一般的类型而不是一个类。另外，库提供了一些<code>typedef</code>，以便使用更清晰的类型名称来使得代码可读性更强。</p>
+<h2 id="yumoatomic模板类">yumo::atomic模板类</h2>
+<p><code>yumo::atomic</code>模板类是对<code>std::atomic</code>的封装与改进，拥有一个模板参数<code>T</code>，指示存储值的类型</p>
+<h3 id="构造函数">构造函数</h3>
+<p>函数有三个构造函数</p>
+<ul>
+<li><code>atomic()</code>：<code>=default</code>，不执行操作。</li>
+<li><code>atomic(T val)</code>：使用一个<code>T</code>类型的值作为初始值。</li>
+<li><code>atomic(const atomic &amp;other)</code>：复制构造函数，从已有<code>yumo::atomic</code>复制。</li>
+</ul>
+<p><strong>示例</strong></p>
+<pre><code class="language-cpp">yumo::atomic&lt;bool&gt; sign;
+yumo::atomic&lt;bool&gt; ready(true);
+yumo::atomic&lt;bool&gt; ready_copy(ready);
+</code></pre>
+<h3 id="运算符重载">运算符重载</h3>
+<p><code>yumo::atomic</code>提供了一些运算符重载，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>支持的参数类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>=</td>
+<td>模板参数（T）、yumo::atomic</td>
+</tr>
+<tr>
+<td>==</td>
+<td>模板参数（T）、yumo::atomic、std::atomic</td>
+</tr>
+<tr>
+<td>!=</td>
+<td>模板参数（T）、yumo::atomic、std::atomic</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例</strong></p>
+<pre><code class="language-cpp">yumo::atomic&lt;bool&gt; bool_a(true);
+yumo::atomic&lt;bool&gt; bool_b(false);
+
+std::cout &lt;&lt; &quot;bool_a：&quot; &lt;&lt; bool_a &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;bool_b：&quot; &lt;&lt; bool_b &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;是否不等：&quot; &lt;&lt; bool_b != bool_a &lt;&lt; std::endl;
+std::cout &lt;&lt; &quot;是否相等：&quot; &lt;&lt; bool_b == bool_a &lt;&lt; std::endl;
+
+bool_a = bool_b;
+std::cout &lt;&lt; &quot;赋值后的bool_a：&quot; &lt;&lt; bool_a &lt;&lt; std::endl;
+bool_a = true;
+std::cout &lt;&lt; &quot;重新赋值回true的bool_a：&quot; &lt;&lt; bool_a &lt;&lt; std::endl ;
+</code></pre>
+<h3 id="隐式转换">隐式转换</h3>
+<p><code>yumo::atomic</code>可以隐式的转换为<code>T</code>型值，一特性使得<code>yumo::atomic&lt;T&gt;</code>可以在任何需要<code>T</code>类型的上下文中使用，包括<code>if</code>、<code>while</code>等条件判断</p>
+<p><strong>示例</strong></p>
+<pre><code class="language-cpp">yumo::atomic&lt;bool&gt; ready(false);
+yumo::preloadAudio(L&quot;./test.wav&quot;,&amp;ready);
+while (ready){
+	return;
+}
+</code></pre>
+<h3 id="其他成员函数">其他成员函数</h3>
+<p>考虑兼容等因素，<code>yumo::atomic</code>保留了<code>load</code>和<code>store</code>两个标准的原子类操作方法，原型如下：</p>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+class atomic {
+	// ...
+	T load(std::memory_order order = std::memory_order_seq_cst) const;
+	void store(T val, std::memory_order order = std::memory_order_seq_cst);
+};
+</code></pre>
+<p><strong>示例</strong></p>
+<pre><code class="language-cpp">yumo::atomic&lt;int&gt; counter(0);
+
+int current = counter.load();
+counter.store(current + 1);
+</code></pre>
+<h2 id="typedef">typedef</h2>
+<p>库提供了几个名称更有意义的typedef以增强代码可读性</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>类型</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>readySign</td>
+<td>bool</td>
+<td>完成标志，线程操作完成后以此通知调用方</td>
+</tr>
+<tr>
+<td>switchSign</td>
+<td>bool</td>
+<td>播放控制开关，应用详见<a href="../global">全局状态管理</a></td>
+</tr>
+<tr>
+<td>volumeSign</td>
+<td>float</td>
+<td>声音值，应用详见<a href="../global">全局状态管理</a></td>
+</tr>
+</tbody>
+</table>
 
                     </div>
                 </div>
                 
+                <div class="toc-sidebar">
+                    <div class="toc-title">目录</div>
+                    <div class="toc-list">
+                        
+                        <a href="#yumoatomic模板类" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            yumo::atomic模板类
+                        </a>
+                        <a href="#构造函数" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            构造函数
+                        </a>
+                        <a href="#运算符重载" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            运算符重载
+                        </a>
+                        <a href="#隐式转换" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            隐式转换
+                        </a>
+                        <a href="#其他成员函数" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            其他成员函数
+                        </a>
+                        <a href="#typedef" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            typedef
+                        </a>
+                    </div>
+                </div>
             </div>
         </main>
         

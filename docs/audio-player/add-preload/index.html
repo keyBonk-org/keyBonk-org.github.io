@@ -122,6 +122,11 @@
                         </div>
                         <div class="sidebar-item">
                             <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/atomic/" class="sidebar-item-title">原子类与其typedef</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/choice/" class="sidebar-item-title">音频库的选择</a>
                             </div>
                         </div>
@@ -186,7 +191,7 @@
 <p>宽字符字符串，指定需要预处理的音频文件名。</p>
 <p><code>[out,optional] ready</code></p>
 <p>类型：<strong>readySign*</strong></p>
-<p>函数会将其指向的对象赋为<code>false</code>然后启动后台线程并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/#%E5%AE%8C%E6%88%90%E6%A0%87%E5%BF%97">完成标志</a>。</p>
+<p>函数会将其指向的对象赋为<code>false</code>然后启动后台线程并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/typedef">原子类typedef</a>。</p>
 <h3 id="返回值">返回值</h3>
 <p>类型：<strong>size_t</strong></p>
 <p>预处理后的音频在队列中的ID。</p>
@@ -239,7 +244,7 @@ size_t instanceId = yumo::addAudio(preloadId, 0.7f);
 <p>一个指针，用于获取播放实例ID，如果音频足够长且需要一些诸如音量调整的精细操作，则需要接受ID。</p>
 <p><code>[out,optional] ready</code></p>
 <p>类型：<strong>readySign*</strong></p>
-<p>函数会将其指向的对象赋为<code>false</code>并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/#%E5%AE%8C%E6%88%90%E6%A0%87%E5%BF%97">完成标志</a>。</p>
+<p>函数会将其指向的对象赋为<code>false</code>并返回；后台读取线程在完成解析后，会将其更新为<code>true</code>。调用方可通过检查该值来确认对应音频是否已就绪。有关<code>readySign</code>，请参考<a href="../atomic/typedef">原子类typedef</a>。</p>
 <h3 id="示例-3">示例</h3>
 <pre><code class="language-cpp">// 可选的内容
 size_t instanceId = 0;

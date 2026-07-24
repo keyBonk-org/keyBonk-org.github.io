@@ -120,6 +120,11 @@
                                 <a href="/docs/audio-player/add-preload/" class="sidebar-item-title">预处理与播放</a>
                             </div>
                         </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/atomic/" class="sidebar-item-title">原子类与其typedef</a>
+                            </div>
+                        </div>
                         <div class="sidebar-item active">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/choice/" class="sidebar-item-title">音频库的选择</a>
@@ -148,7 +153,7 @@
                         <p>一个很普遍的现象是：在目标相同的各种库中选择最适合自己项目的一个一直是一件困难的时期，本文提供了Yumo audio与Windows原生API及主流C/C++音频库进行的对比，以方便各位根据项目需求做出选择。</p>
 <h3 id="简单介绍">简单介绍</h3>
 <ul>
-<li><strong>Yumo audio</strong>：基于 Win32 的 C++17 音频库，目前只支持 WAV 播放，支持异步非阻塞播放、音频混合、暂停/静音和音量独立控制。</li>
+<li><strong>Yumo audio</strong>：基于 Win32 的 C++17 音频库，目前只支持WAV与MP3播放，支持异步非阻塞播放、音频混合、暂停/静音和音量独立控制。</li>
 <li><strong>PlaySound / sndPlaySound</strong>：Windows 最简单的音频播放 API，适合播放小型 WAV 文件。</li>
 <li><strong>MCI（mciSendString / mciSendCommand）</strong>：Windows 多媒体控制接口，支持更多格式和播放控制，但不支持多线程混音。</li>
 <li><strong>waveOut</strong>：Windows 底层波形音频 API，提供更细粒度的音频流控制。（实际上，本库就是封装过的waveOut）</li>
@@ -199,7 +204,7 @@
 </tr>
 <tr>
 <td><strong>音频格式</strong></td>
-<td>WAV</td>
+<td>WAV / MP3</td>
 <td>WAV</td>
 <td>WAV / MP3 等</td>
 <td>PCM</td>
@@ -364,7 +369,7 @@
 </tr>
 <tr>
 <td><strong>适用场景</strong></td>
-<td>轻量级 WAV 多音效管理</td>
+<td>轻量级多音效管理</td>
 <td>简单提示音</td>
 <td>简单媒体播放</td>
 <td>底层音频控制</td>
