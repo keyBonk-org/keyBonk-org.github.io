@@ -1,0 +1,134 @@
+/* 侧边栏导航组件样式 */
+
+/* 文件导航板块 - 使用 CSS 变量控制宽度 */
+.content-sidebar {
+    width: var(--file-nav-width);
+    flex-shrink: 0;
+    position: sticky;
+    top: 100px;
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* 使用 flexbox 布局，便于添加内部占位元素 */
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+/* 文件导航内部左侧空白占位元素 */
+.content-sidebar-inner-left {
+    /* 使用 CSS 变量控制内部左侧空白宽度 */
+    width: var(--file-nav-inner-left-padding);
+    flex-shrink: 0;
+    /* 此元素不会增加 content-sidebar 的总宽度，
+       因为它是通过 width 变量控制的，
+       而 content-sidebar 的总宽度由 --file-nav-width 决定 */
+}
+
+/* 文件导航树 - 占据剩余空间，允许垂直滚动 */
+.content-sidebar .sidebar-tree {
+    flex: 1;
+    min-width: 0;
+    /* 确保内容可以溢出，触发父容器的滚动 */
+    overflow-y: auto;
+}
+
+.content-sidebar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.content-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.content-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.content-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.sidebar-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding: 4px 0;
+}
+
+.sidebar-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-item-header {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 5px 8px;
+    border-radius: 4px;
+    transition: background-color 0.15s;
+}
+
+.sidebar-item-header:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+.sidebar-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    font-size: 0.6rem;
+    color: #999;
+    cursor: pointer;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.sidebar-item.has-children .sidebar-arrow {
+    transform: rotate(90deg);
+}
+
+.sidebar-item.has-children.collapsed .sidebar-arrow {
+    transform: rotate(0deg);
+}
+
+.sidebar-item-title {
+    color: #555;
+    text-decoration: none;
+    font-size: 0.88rem;
+    flex: 1;
+    white-space: nowrap;
+}
+
+.sidebar-item.active > .sidebar-item-header > .sidebar-item-title {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.sidebar-item-title:hover {
+    color: #3498db;
+}
+
+.sidebar-children {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    padding-left: 16px;
+    overflow: visible;
+}
+
+.sidebar-item.collapsed > .sidebar-children {
+    display: none;
+}
+
+.content-main {
+    flex: 1;
+    min-width: 0;
+}

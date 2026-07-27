@@ -1,0 +1,28 @@
+/* 导航栏响应式样式 */
+
+@media (max-width: 900px) {
+    .navbar-links {
+        display: none;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
+    }
+
+    .navbar-container {
+        height: 80px;
+        padding: 0 20px;
+    }
+
+    .navbar-right {
+        gap: 10px;
+    }
+
+    .content-sidebar {
+        display: none;
+    }
+}

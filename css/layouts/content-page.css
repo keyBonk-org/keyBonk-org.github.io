@@ -1,0 +1,80 @@
+/* 文档和博客页面布局 */
+
+/* 文档子页面 - 解除 #main-content 的宽度和内距限制 */
+body.page-docs #main-content {
+    max-width: none;
+    padding: 100px 0 0 0;
+}
+
+/* 博客子页面 - 解除 #main-content 的宽度和内距限制 */
+body.page-blog #main-content {
+    max-width: none;
+    padding: 100px 0 0 0;
+}
+
+.content-page {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    /* 默认：两侧空白为 0，由页面类型特定的规则覆盖 */
+    padding: 6px 0 4px 0;
+    gap: var(--section-padding);
+}
+
+/* ===== 文档页面规则 ===== */
+
+/* 文档页面（有文件导航栏）- 基础 padding，不含左右空白 */
+body.page-docs .content-page {
+    max-width: none;
+    margin: 0;
+    padding: 6px 0 4px 0;
+}
+
+/* 文档页面 - 有目录时：左=文件导航左侧空白，右=目录右侧空白 */
+body.page-docs .content-page.content-page-has-toc {
+    padding-left: var(--file-nav-left-margin);
+    padding-right: var(--toc-right-margin);
+}
+
+/* 文档页面 - 无目录时：左=文件导航左侧空白，右=无目录文档右侧空白 */
+body.page-docs .content-page:not(.content-page-has-toc) {
+    padding-left: var(--file-nav-left-margin);
+    padding-right: var(--docs-no-toc-right-margin);
+}
+
+/* ===== 博客页面规则 ===== */
+
+/* 博客页面 - 基础样式 */
+body.page-blog .content-page {
+    max-width: none;
+    margin: 0;
+}
+
+/* 博客页面 - 有目录时：左=博客左侧空白，右=目录右侧空白 */
+body.page-blog .content-page.blog-page.content-page-has-toc {
+    padding-left: var(--blog-left-margin);
+    padding-right: var(--toc-right-margin);
+}
+
+/* 博客页面 - 无目录时：两侧使f用 --blog-no-toc-side-margin */
+body.page-blog .content-page.blog-page:not(.content-page-has-toc) {
+    padding-left: var(--blog-no-toc-side-margin);
+    padding-right: var(--blog-no-toc-side-margin);
+}
+
+/* ===== 正文内容宽度控制 ===== */
+
+/* 文档子页面 - 移除 .content-main 的最大宽度限制 */
+body.page-docs .content-page-has-toc .content-main {
+    max-width: none;
+}
+
+/* 博客子页面 - 移除 .content-main 的最大宽度限制 */
+body.page-blog .content-page-has-toc .content-main {
+    max-width: none;
+}
+
+.content-page.blog-page .content-main {
+    max-width: none;
+    flex: 1;
+}

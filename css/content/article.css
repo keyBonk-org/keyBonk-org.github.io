@@ -1,0 +1,119 @@
+/* 文章内容基础样式 */
+
+.article-content {
+    line-height: 1.8;
+    color: #444;
+    overflow-x: auto;
+    word-wrap: break-word;
+}
+
+.article-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article-content pre,
+.article-content table {
+    max-width: 100%;
+    overflow-x: auto;
+    display: block;
+}
+
+.article-content h2 {
+    font-size: 1.5rem;
+    color: #2c3e50;
+    margin: 30px 0 15px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    scroll-margin-top: 100px;
+}
+
+.article-content h3 {
+    font-size: 1.25rem;
+    color: #34495e;
+    margin: 25px 0 12px;
+    scroll-margin-top: 100px;
+}
+
+.article-content h4 {
+    font-size: 1.1rem;
+    color: #34495e;
+    margin: 20px 0 10px;
+    scroll-margin-top: 100px;
+}
+
+.article-content p {
+    margin: 12px 0;
+}
+
+.article-content ul,
+.article-content ol {
+    padding-left: 25px;
+    margin: 12px 0;
+}
+
+.article-content li {
+    margin: 6px 0;
+}
+
+.article-content blockquote {
+    border-left: 4px solid #3498db;
+    padding: 10px 15px;
+    background-color: #f8f9fa;
+    margin: 15px 0;
+    color: #666;
+    font-style: italic;
+}
+
+.article-content a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+.article-content .contains-task-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.article-content .task-list-item {
+    padding-left: 0;
+}
+
+.article-content .task-list-item-checkbox {
+    margin-right: 8px;
+}
+
+.article-content dl {
+    margin: 15px 0;
+}
+
+.article-content dt {
+    font-weight: 600;
+    margin-top: 10px;
+    color: #2c3e50;
+}
+
+.article-content dd {
+    margin-left: 20px;
+    color: #555;
+}
+
+.article-content sub,
+.article-content sup {
+    font-size: 0.75em;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+.article-content sup {
+    top: -0.5em;
+}
+
+.article-content sub {
+    bottom: -0.25em;
+}

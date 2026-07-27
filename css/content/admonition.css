@@ -1,0 +1,71 @@
+/* 提示框样式 */
+
+.article-content .admonition {
+    padding: 15px 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+    border-left: 4px solid;
+    background-color: #f8f9fa;
+}
+
+.article-content .admonition-title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    margin-top: 0;
+    font-size: 1rem;
+}
+
+.article-content .admonition.note,
+.article-content .note {
+    border-left-color: #3498db;
+    background-color: #ebf5fb;
+}
+
+.article-content .admonition.note .admonition-title,
+.article-content .note .admonition-title {
+    color: #2980b9;
+}
+
+.article-content .admonition.tip,
+.article-content .tip {
+    border-left-color: #27ae60;
+    background-color: #eafaf1;
+}
+
+.article-content .admonition.tip .admonition-title,
+.article-content .tip .admonition-title {
+    color: #1e8449;
+}
+
+.article-content .admonition.info,
+.article-content .info {
+    border-left-color: #1abc9c;
+    background-color: #e8f8f5;
+}
+
+.article-content .admonition.info .admonition-title,
+.article-content .info .admonition-title {
+    color: #148f77;
+}
+
+.article-content .admonition.warning,
+.article-content .warning {
+    border-left-color: #f39c12;
+    background-color: #fef9e7;
+}
+
+.article-content .admonition.warning .admonition-title,
+.article-content .warning .admonition-title {
+    color: #d68910;
+}
+
+.article-content .admonition.danger,
+.article-content .danger {
+    border-left-color: #e74c3c;
+    background-color: #fdedec;
+}
+
+.article-content .admonition.danger .admonition-title,
+.article-content .danger .admonition-title {
+    color: #c0392b;
+}

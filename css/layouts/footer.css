@@ -1,0 +1,84 @@
+/* 页脚样式 */
+
+.site-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 40px 20px 0;
+    margin-top: 40px;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    padding-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.footer-brand {
+    flex: 0 0 300px;
+}
+
+.footer-logo {
+    height: 32px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.footer-brand-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.footer-tagline {
+    margin-top: 12px;
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.footer-links,
+.footer-community,
+.footer-friends {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-heading {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 6px;
+}
+
+.footer-links a,
+.footer-community a,
+.footer-friends a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover,
+.footer-community a:hover,
+.footer-friends a:hover {
+    color: #3498db;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 20px 0;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: #999;
+    font-size: 0.85rem;
+}

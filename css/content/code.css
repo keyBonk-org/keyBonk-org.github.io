@@ -1,0 +1,62 @@
+/* 代码块样式 */
+
+.article-content code {
+    background-color: #f4f4f4;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+.article-content pre {
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 15px 0;
+    background-color: #f6f8fa;
+}
+
+.article-content pre::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.article-content pre::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.article-content pre::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.article-content pre::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+.article-content pre code {
+    background: none;
+    padding: 0;
+    color: inherit;
+    overflow-x: auto;
+}
+
+.article-content pre code::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+.article-content pre code::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+}
+
+.article-content pre code::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+}
+
+.article-content pre code::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.25);
+}

@@ -1,0 +1,67 @@
+/* CSS 变量定义 - 布局参数控制 */
+
+/* ===== 桌面端默认变量 (>1024px) ===== */
+:root {
+    /* ===== 断点定义（用于媒体查询）===== */
+    --breakpoint-tablet: 1024px;
+    --breakpoint-mobile: 768px;
+    
+    /* ===== 文档页面（有文件导航栏）===== */
+    /* 文件导航左侧与浏览器页面边界之间的空白区域宽度（百分比） */
+    --file-nav-left-margin: 4%;
+    
+    /* ===== 通用（有目录栏的页面）===== */
+    /* 目录右侧与浏览器页面边界之间的空白区域宽度（百分比） */
+    --toc-right-margin: 0%;
+    
+    /* ===== 博客页面（有目录，无文件导航）===== */
+    /* 博客页面左侧空白（百分比） */
+    --blog-left-margin: 15%;
+    
+    /* ===== 无目录的文档页面 ===== */
+    /* 无目录文档页面的右侧空白（百分比） */
+    --docs-no-toc-right-margin: 3%;
+    
+    /* ===== 无目录的博客页面 ===== */
+    /* 无目录博客页面的两侧空白（百分比） */
+    --blog-no-toc-side-margin: 20%;
+    
+    /* ===== 板块尺寸 ===== */
+    /* 文件导航板块的宽度 */
+    --file-nav-width: 250px;
+    
+    /* 目录板块的宽度 */
+    --toc-width: 220px;
+    
+    /* 文件导航、目录与正文三板块之间的内距 */
+    --section-padding: 40px;
+    
+    /* 文件导航板块内部左侧空白区域的宽度 */
+    --file-nav-inner-left-padding: 0px;
+}
+
+/* ===== 平板端变量覆盖 (≤1024px) ===== */
+@media (max-width: 1024px) {
+    :root {
+        --file-nav-left-margin: 2%;
+        --toc-right-margin: 0%;
+        --blog-left-margin: 10%;
+        --docs-no-toc-right-margin: 2%;
+        --blog-no-toc-side-margin: 15%;
+        --section-padding: 20px;
+    }
+}
+
+/* ===== 移动端变量覆盖 (≤768px) ===== */
+@media (max-width: 768px) {
+    :root {
+        --file-nav-left-margin: 15px;
+        --toc-right-margin: 15px;
+        --blog-left-margin: 15px;
+        --docs-no-toc-right-margin: 15px;
+        --blog-no-toc-side-margin: 15px;
+        --section-padding: 10px;
+        --file-nav-width: 100%;
+        --toc-width: 100%;
+    }
+}

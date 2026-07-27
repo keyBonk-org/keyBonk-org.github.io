@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误处理 - KeyBonk</title>
+    <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
+    <link rel="stylesheet" href="/css/github-dark.min.css" id="hljs-dark" disabled>
+</head>
+<body class="page-docs">
+    <div id="app">
+        
+        <nav id="navbar" style="display: block;">
+            <div class="navbar-container">
+                <div class="navbar-brand">
+                    <a href="/index.html">
+                        <img src="/imgs/icon.png" alt="KeyBonk Logo" class="navbar-logo">
+                        KeyBonk
+                    </a>
+                </div>
+                <ul class="navbar-links">
+                    
+                <li>
+                    <a href="/index.html">
+                        首页
+                    </a>
+                </li>
+                <li>
+                    <a href="/about/">
+                        关于
+                    </a>
+                </li>
+                <li>
+                    <a href="/projects/">
+                        项目表
+                    </a>
+                </li>
+                <li>
+                    <a href="/blog/">
+                        博客
+                    </a>
+                </li>
+                <li>
+                    <a href="/docs/">
+                        文档
+                    </a>
+                </li>
+                </ul>
+                <div class="navbar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="搜索...">
+                        <img src="/imgs/UI/search.png" class="search-icon" alt="搜索">
+                    </div>
+                    <a href="https://github.com/keyBonk-org" target="_blank" class="github-link" title="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                    </a>
+                    <button class="theme-toggle" title="切换主题">
+                        <img src="/imgs/UI/dark_mood.png" class="theme-toggle-icon" alt="切换主题">
+                    </button>
+                    <button class="menu-toggle" title="菜单">
+                        <img src="/imgs/UI/menu.png" class="menu-icon" alt="菜单">
+                    </button>
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <div class="mobile-menu-overlay"></div>
+            </div>
+        </nav>
+        <main id="main-content">
+            
+            <div class="content-page content-page-has-toc">
+                
+                <div class="content-sidebar" id="contentSidebar">
+                    <div class="content-sidebar-inner-left"></div>
+                    <div class="sidebar-tree" id="sidebarTree">
+                        
+                        <div class="sidebar-item has-children collapsed">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/keybonk/" class="sidebar-item-title">KeyBonk</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/keybonk/install/" class="sidebar-item-title">安装指南</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                        <div class="sidebar-item has-children">
+                            <div class="sidebar-item-header">
+                                <span class="sidebar-arrow" onclick="var item=this.closest('.sidebar-item'); item.classList.toggle('collapsed'); event.stopPropagation();">▶</span>
+                                <a href="/docs/audio-player/" class="sidebar-item-title">Yumo audio文档</a>
+                            </div>
+                            
+                        <div class="sidebar-children">
+                            
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/usage/" class="sidebar-item-title">开始使用</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/download/" class="sidebar-item-title">获取Yumo audio</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/make_get/" class="sidebar-item-title">为make管理的项目引入Yumo audio</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/add-preload/" class="sidebar-item-title">预处理与播放</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/atomic/" class="sidebar-item-title">原子类与其typedef</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/status/" class="sidebar-item-title">音频播放状态管理</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/global/" class="sidebar-item-title">全局状态管理</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item active">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/exception/" class="sidebar-item-title">错误处理</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/choice/" class="sidebar-item-title">音频库的选择</a>
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-main">
+                    
+                    <div class="article-header">
+                        <h1>错误处理</h1>
+                        <div class="article-meta">
+                            <div class="meta-truncated">
+                                
+                                <span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span>
+                                <span class="meta-date">2026-07-25</span>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">异常</span><span class="tag">错误处理</span></div>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    <div class="article-content">
+                        <p>Yumo audio使用自定义的异常类体系来报告和处理错误。所有异常类都定义在<code>yumo_except.hpp</code>中，位于<code>yumo</code>命名空间下。这个头文件是可选的，你完全可以选择不处理异常，当然，对应的就是你可能需要面对程序异常崩溃。</p>
+<p>这个文档虽然归属于Yumo audio文档，但实际上yumo_exception有很多独立于Yumo audio的功能特性，库只选用了一部分，所以你可能会觉得文档有很多废话。</p>
+<h2 id="异常类体系">异常类体系</h2>
+<pre><code class="language-cpp">#include &quot;yumo_except.hpp&quot;
+</code></pre>
+<h3 id="类层次结构">类层次结构</h3>
+<pre><code>yumo::exception          (基础异常类，仅包含错误类型)
+    ├── yumo::exception_ex    (扩展异常类，const wchar_t* 存储错误信息)
+    └── yumo::exception_ex2   (扩展异常类，std::wstring 存储错误信息)
+
+yumo::w_exception        (独立的宽字符异常类，不继承自 exception)
+</code></pre>
+<h2 id="错误类型枚举">错误类型枚举</h2>
+<p><code>yumo::exception</code>类中定义了一个枚举<code>type</code>，用于标识不同的错误类型，包含以下几种类型</p>
+<table>
+<thead>
+<tr>
+<th>错误类型</th>
+<th>说明</th>
+<th>库内是否使用</th>
+<th>使用场景（部分）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FileNotFound</code></td>
+<td>文件未找到</td>
+<td>未使用</td>
+<td>音频文件路径错误</td>
+</tr>
+<tr>
+<td><code>FileOpenError</code></td>
+<td>文件打开失败</td>
+<td>使用</td>
+<td>权限不足等导致打开失败</td>
+</tr>
+<tr>
+<td><code>FileReadError</code></td>
+<td>文件读取错误</td>
+<td>使用</td>
+<td>文件损坏或读取权限问题</td>
+</tr>
+<tr>
+<td><code>FileWriteError</code></td>
+<td>文件写入错误</td>
+<td>未使用</td>
+<td>文件不存在或读取权限问题</td>
+</tr>
+<tr>
+<td><code>FileCloseError</code></td>
+<td>文件关闭错误</td>
+<td>未使用</td>
+<td><del>我也不知道啥情况会用上这个</del></td>
+</tr>
+<tr>
+<td><code>FileError</code></td>
+<td>通用文件错误</td>
+<td>使用</td>
+<td>文件错误但无法确定是哪个错误</td>
+</tr>
+<tr>
+<td><code>InvalidInput</code></td>
+<td>输入参数无效</td>
+<td>使用</td>
+<td>传入的音频ID无效</td>
+</tr>
+<tr>
+<td><code>InvalidFormat</code></td>
+<td>格式错误</td>
+<td>未使用</td>
+<td>音频格式不支持</td>
+</tr>
+<tr>
+<td><code>InvalidState</code></td>
+<td>状态不允许</td>
+<td>未使用</td>
+<td>在错误的状态下调用了API</td>
+</tr>
+<tr>
+<td><code>OutOfMemory</code></td>
+<td>内存不足</td>
+<td>使用</td>
+<td>加载过大的音频文件</td>
+</tr>
+<tr>
+<td><code>MemoryError</code></td>
+<td>内存错误</td>
+<td>未使用</td>
+<td>无法确定具体原因的内存错误</td>
+</tr>
+<tr>
+<td><code>UnknownError</code></td>
+<td>未知错误</td>
+<td>使用</td>
+<td>原因未知且无法粗略确定归属的错误</td>
+</tr>
+</tbody>
+</table>
+<p>由于这个头的设计目的并不局限于这一个库，有些错误类型实际上并没有使用到，可以参考“库内是否使用”一栏。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>冷知识：我懒得写错误处理的时候会直接抛<code>UnknownError</code>糊弄你</p>
+</div>
+<h2 id="基础异常类">基础异常类</h2>
+<p><code>yumo::exception</code> 是所有异常的基类，仅包含一个错误类型枚举值。</p>
+<h3 id="原型">原型</h3>
+<pre><code class="language-cpp">class exception {
+public:
+    enum class type { /* ... */ };
+
+    exception() = delete;
+    exception(type t);
+    type getType() const;
+};
+</code></pre>
+<h3 id="使用示例">使用示例</h3>
+<pre><code class="language-cpp">try {
+    // ...
+} catch (const yumo::exception &amp;e) {
+    switch (e.getType()) {
+        case yumo::exception::type::FileOpenError:
+            std::wcout &lt;&lt; L&quot;文件打开失败&quot; &lt;&lt; std::endl;
+            break;
+        case yumo::exception::type::InvalidInput:
+            std::wcout &lt;&lt; L&quot;参数无效&quot; &lt;&lt; std::endl;
+            break;
+        default:
+            std::wcout &lt;&lt; L&quot;发生错误&quot; &lt;&lt; std::endl;
+    }
+}
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>yumo::exception</code> 类不可被直接构造（<code>= delete</code>），只能通过其派生类抛出。</p>
+</div>
+<h2 id="扩展异常类指针版本">扩展异常类（指针版本）</h2>
+<p><code>yumo::exception_ex</code> 继承自 <code>yumo::exception</code>，使用 <code>const wchar_t*</code> 存储错误信息。</p>
+<h3 id="原型-2">原型</h3>
+<pre><code class="language-cpp">class exception_ex : public exception {
+public:
+    exception_ex(type t, const wchar_t *msg) noexcept;
+    const wchar_t *what() const noexcept;
+};
+</code></pre>
+<h3 id="特点">特点</h3>
+<ul>
+<li>使用 <code>const wchar_t*</code> 存储错误信息</li>
+<li><code>noexcept</code> 保证不会在构造时抛出异常</li>
+<li>适用于错误信息为静态字符串字面量的场景</li>
+</ul>
+<h3 id="使用示例-2">使用示例</h3>
+<pre><code class="language-cpp">try {
+    yumo::preloadAudio(L&quot;test.wav&quot;);
+} catch (const yumo::exception_ex &amp;e) {
+    std::wcout &lt;&lt; L&quot;错误类型: &quot; &lt;&lt; static_cast&lt;int&gt;(e.getType()) &lt;&lt; std::endl;
+    std::wcout &lt;&lt; L&quot;错误信息: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>exception_ex</code> 接收的是 <code>const wchar_t*</code> 指针，调用者需要确保该指针指向的字符串在异常对象生命周期内有效。建议使用字符串字面量或静态存储期的字符串。</p>
+</div>
+<h2 id="扩展异常类字符串版本">扩展异常类（字符串版本）</h2>
+<p><code>yumo::exception_ex2</code> 继承自 <code>yumo::exception</code>，使用 <code>std::wstring</code> 存储错误信息。</p>
+<h3 id="原型-3">原型</h3>
+<pre><code class="language-cpp">class exception_ex2 : public exception {
+public:
+    exception_ex2(type t, const std::wstring &amp;msg);
+    const std::wstring &amp;what() const noexcept;
+};
+</code></pre>
+<h3 id="特点-2">特点</h3>
+<ul>
+<li>使用 <code>std::wstring</code> 存储错误信息，自动管理内存</li>
+<li>可以安全地使用临时字符串或动态构造的字符串</li>
+<li>适用于需要拼接或格式化错误信息的场景</li>
+</ul>
+<h3 id="使用示例-3">使用示例</h3>
+<pre><code class="language-cpp">try {
+    // ...
+} catch (const yumo::exception_ex2 &amp;e) {
+    std::wcout &lt;&lt; L&quot;错误类型: &quot; &lt;&lt; static_cast&lt;int&gt;(e.getType()) &lt;&lt; std::endl;
+    std::wcout &lt;&lt; L&quot;错误信息: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code>exception_ex2</code>相比<code>exception_ex</code>更安全，因为它内部持有字符串的拷贝。当不确定使用哪种异常时，优先选择 <code>exception_ex2</code>。</p>
+</div>
+<h2 id="独立异常类">独立异常类</h2>
+<p><code>yumo::w_exception</code> 是一个独立的异常类，不继承自 <code>yumo::exception</code>，仅提供简单的错误信息。</p>
+<h3 id="原型-4">原型</h3>
+<pre><code class="language-cpp">class w_exception {
+public:
+    w_exception() = delete;
+    w_exception(const wchar_t *msg) noexcept;
+    const wchar_t *what() const noexcept;
+};
+</code></pre>
+<h3 id="特点-3">特点</h3>
+<ul>
+<li>独立的异常体系，不继承自任何基类</li>
+<li>仅提供 <code>what()</code> 方法获取错误信息</li>
+<li>适用于需要简单错误报告的场景</li>
+</ul>
+<h3 id="使用示例-4">使用示例</h3>
+<pre><code class="language-cpp">try {
+    // ...
+} catch (const yumo::w_exception &amp;e) {
+    std::wcout &lt;&lt; L&quot;错误: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+</code></pre>
+<h2 id="捕获顺序">捕获顺序</h2>
+<p>当捕获异常时，建议按照从具体到通用的顺序进行捕获：</p>
+<pre><code class="language-cpp">try {
+    // 可能抛出异常的代码
+} catch (const yumo::exception_ex2 &amp;e) {
+    // 捕获 exception_ex2，可获取详细信息
+    std::wcout &lt;&lt; L&quot;错误: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+} catch (const yumo::exception_ex &amp;e) {
+    // 捕获 exception_ex
+    std::wcout &lt;&lt; L&quot;错误: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+} catch (const yumo::exception &amp;e) {
+    // 捕获所有继承自 exception 的异常
+    std::wcout &lt;&lt; L&quot;错误类型: &quot; &lt;&lt; static_cast&lt;int&gt;(e.getType()) &lt;&lt; std::endl;
+} catch (const yumo::w_exception &amp;e) {
+    // 捕获 w_exception
+    std::wcout &lt;&lt; L&quot;错误: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+} catch (const std::exception &amp;e) {
+    // 捕获标准异常
+    std::cout &lt;&lt; &quot;标准异常: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+} catch (...) {
+    // 捕获所有未知异常
+    std::cout &lt;&lt; &quot;未知错误&quot; &lt;&lt; std::endl;
+}
+</code></pre>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code>yumo::exception_ex</code> 和 <code>yumo::exception_ex2</code> 都继承自 <code>yumo::exception</code>，因此捕获顺序很重要。应先捕获派生类，再捕获基类。而 <code>yumo::w_exception</code> 不继承自 <code>yumo::exception</code>，可以单独捕获。</p>
+</div>
+<h2 id="常见错误场景">常见错误场景</h2>
+<h3 id="文件加载错误">文件加载错误</h3>
+<pre><code class="language-cpp">try {
+    size_t preloadId = yumo::preloadAudio(L&quot;missing.wav&quot;);
+} catch (const yumo::exception_ex &amp;e) {
+    // 可能是 FileNotFound 或 FileOpenError
+    std::wcout &lt;&lt; L&quot;加载音频失败: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+</code></pre>
+<h3 id="参数错误">参数错误</h3>
+<pre><code class="language-cpp">try {
+    size_t instanceId = yumo::addAudio(9999);  // 无效的预加载ID
+} catch (const yumo::exception_ex &amp;e) {
+    if (e.getType() == yumo::exception::type::InvalidInput) {
+        std::wcout &lt;&lt; L&quot;无效的音频ID&quot; &lt;&lt; std::endl;
+    }
+}
+</code></pre>
+<h3 id="设备错误">设备错误</h3>
+<pre><code class="language-cpp">try {
+    // 打开音频设备时可能失败
+    yumo::addAudio(preloadId);
+} catch (const yumo::exception_ex2 &amp;e) {
+    if (e.getType() == yumo::exception::type::UnknownError) {
+        std::wcout &lt;&lt; L&quot;音频设备错误: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+    }
+}
+</code></pre>
+<h2 id="完整错误处理示例">完整错误处理示例</h2>
+<pre><code class="language-cpp">#include &quot;audioPlayer.hpp&quot;
+#include &lt;iostream&gt;
+
+int main() {
+    yumo::readySign ready(false);
+
+    try {
+        // 预处理音频
+        size_t preloadId = yumo::preloadAudio(L&quot;test.wav&quot;, &amp;ready);
+
+        // 等待加载完成
+        while (!ready) {
+            Sleep(10);
+        }
+
+        // 添加播放
+        size_t instanceId = yumo::addAudio(preloadId);
+
+        // 播放一段时间
+        Sleep(5000);
+
+        // 移除
+        yumo::remove(instanceId);
+        yumo::removePreloadedAudio(preloadId);
+
+    } catch (const yumo::exception_ex2 &amp;e) {
+        // 捕获带详细信息的异常
+        std::wcout &lt;&lt; L&quot;[错误] 类型=&quot; 
+                   &lt;&lt; static_cast&lt;int&gt;(e.getType()) 
+                   &lt;&lt; L&quot;, 信息=&quot; &lt;&lt; e.what() 
+                   &lt;&lt; std::endl;
+
+    } catch (const yumo::exception_ex &amp;e) {
+        // 捕获带字符串信息的异常
+        std::wcout &lt;&lt; L&quot;[错误] 类型=&quot; 
+                   &lt;&lt; static_cast&lt;int&gt;(e.getType()) 
+                   &lt;&lt; L&quot;, 信息=&quot; &lt;&lt; e.what() 
+                   &lt;&lt; std::endl;
+
+    } catch (const yumo::exception &amp;e) {
+        // 捕获基类异常
+        auto type = e.getType();
+        switch (type) {
+            case yumo::exception::type::FileNotFound:
+                std::wcout &lt;&lt; L&quot;文件未找到&quot; &lt;&lt; std::endl;
+                break;
+            case yumo::exception::type::InvalidInput:
+                std::wcout &lt;&lt; L&quot;参数无效&quot; &lt;&lt; std::endl;
+                break;
+            case yumo::exception::type::OutOfMemory:
+                std::wcout &lt;&lt; L&quot;内存不足&quot; &lt;&lt; std::endl;
+                break;
+            default:
+                std::wcout &lt;&lt; L&quot;未知错误，类型ID=&quot; 
+                           &lt;&lt; static_cast&lt;int&gt;(type) 
+                           &lt;&lt; std::endl;
+        }
+
+    } catch (const std::exception &amp;e) {
+        // 捕获标准库异常
+        std::cout &lt;&lt; &quot;标准异常: &quot; &lt;&lt; e.what() &lt;&lt; std::endl;
+
+    } catch (...) {
+        // 兜底：捕获所有异常
+        std::cout &lt;&lt; &quot;发生未知错误&quot; &lt;&lt; std::endl;
+        return 1;
+    }
+
+    return 0;
+}
+</code></pre>
+<h2 id="最佳实践">最佳实践</h2>
+<ol>
+<li><strong>总是捕获异常</strong>：调用可能抛出异常的 API 时，使用 <code>try-catch</code> 块保护</li>
+<li><strong>按照层次捕获</strong>：从最具体的异常类开始捕获，最后捕获基类</li>
+<li><strong>检查错误类型</strong>：使用 <code>getType()</code> 方法获取错误类型，进行针对性处理</li>
+<li><strong>提供用户友好的错误信息</strong>：将内部错误信息转换为用户可理解的提示</li>
+<li><strong>资源清理</strong>：在 <code>catch</code> 块中进行必要的资源清理</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Yumo audio 的某些操作（如 <code>addAudio</code> 使用预加载ID版本）会同步抛出异常，必须在调用处进行捕获。而异步操作（如 <code>preloadAudio</code>）的错误信息会存储在 <code>PreloadedAudio::errorMsg</code> 中，需要通过检查加载结果来获取错误信息。</p>
+</div>
+
+                    </div>
+                    <div class="article-last-modified">最后一次修改时间：2026-07-27 17:59</div>
+                </div>
+                
+                <div class="toc-sidebar">
+                    <div class="toc-title">目录</div>
+                    <div class="toc-list">
+                        
+                        <a href="#异常类体系" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            异常类体系
+                        </a>
+                        <a href="#类层次结构" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            类层次结构
+                        </a>
+                        <a href="#错误类型枚举" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            错误类型枚举
+                        </a>
+                        <a href="#基础异常类" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            基础异常类
+                        </a>
+                        <a href="#原型" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            原型
+                        </a>
+                        <a href="#使用示例" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            使用示例
+                        </a>
+                        <a href="#扩展异常类指针版本" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            扩展异常类（指针版本）
+                        </a>
+                        <a href="#原型-2" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            原型
+                        </a>
+                        <a href="#特点" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            特点
+                        </a>
+                        <a href="#使用示例-2" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            使用示例
+                        </a>
+                        <a href="#扩展异常类字符串版本" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            扩展异常类（字符串版本）
+                        </a>
+                        <a href="#原型-3" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            原型
+                        </a>
+                        <a href="#特点-2" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            特点
+                        </a>
+                        <a href="#使用示例-3" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            使用示例
+                        </a>
+                        <a href="#独立异常类" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            独立异常类
+                        </a>
+                        <a href="#原型-4" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            原型
+                        </a>
+                        <a href="#特点-3" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            特点
+                        </a>
+                        <a href="#使用示例-4" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            使用示例
+                        </a>
+                        <a href="#捕获顺序" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            捕获顺序
+                        </a>
+                        <a href="#常见错误场景" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            常见错误场景
+                        </a>
+                        <a href="#文件加载错误" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            文件加载错误
+                        </a>
+                        <a href="#参数错误" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            参数错误
+                        </a>
+                        <a href="#设备错误" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            设备错误
+                        </a>
+                        <a href="#完整错误处理示例" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            完整错误处理示例
+                        </a>
+                        <a href="#最佳实践" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            最佳实践
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <footer class="site-footer">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <img src="/imgs/icon.png" alt="KeyBonk Logo" class="footer-logo">
+                    <span class="footer-brand-text">KeyBonk</span>
+                    <p class="footer-tagline">让每一次按键掷地有声</p>
+                </div>
+                <div class="footer-links">
+                    <h4 class="footer-heading">导航</h4>
+                    <a href="/index.html">首页</a>
+                    <a href="/about/">关于</a>
+                    <a href="/projects/">项目表</a>
+                    <a href="/blog/">博客</a>
+                    <a href="/docs/">文档</a>
+                </div>
+                <div class="footer-community">
+                    <h4 class="footer-heading">社区</h4>
+                    <a href="https://github.com/keyBonk-org" target="_blank" rel="noopener noreferrer">GitHub</a>
+                    <a href="https://github.com/keyBonk-org/KeyBonk/releases/latest" target="_blank" rel="noopener noreferrer">最新发布</a>
+                </div>
+                <div class="footer-friends">
+                    <h4 class="footer-heading">友链</h4>
+                    <a href="https://xiaoditx.github.io" target="_blank" rel="noopener noreferrer">小狄の站</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 KeyBonk. WTFPL 协议开源。</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <script src="/js/lib/highlight.min.js"></script>
+    <script src="/js/lib/powershell.min.js"></script>
+    <script src="/js/lib/diff.min.js"></script>
+    <script src="/js/lib/rust.min.js"></script>
+    <script src="/js/lib/vim.min.js"></script>
+    <script src="/js/lib/cmake.min.js"></script>
+    <script src="/js/lib/yaml.min.js"></script>
+    <script src="/js/lib/dos.min.js"></script>
+    <script src="/js/search.js"></script>
+    <script src="/js/components/navbar.js"></script>
+    <script>
+        Navbar.init();
+        hljs.highlightAll();
+
+        function toggleMetaPopup(btn) {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.toggle('active');
+            }
+        }
+
+        function closeMetaPopup() {
+            var popup = document.getElementById('metaPopup');
+            if (popup) {
+                popup.classList.remove('active');
+            }
+        }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMetaPopup();
+            }
+        });
+    </script>
+</body>
+</html>

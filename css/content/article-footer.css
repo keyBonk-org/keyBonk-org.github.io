@@ -1,0 +1,11 @@
+/* 文章底部样式 */
+
+.article-last-modified {
+    text-align: right;
+    margin-top: 30px;
+    padding-top: 15px;
+    color: #999;
+    font-size: 0.85rem;
+    font-style: italic;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}

@@ -1,0 +1,110 @@
+/* 响应式设计 */
+
+/* ===== 平板端 (≤1024px) ===== */
+@media (max-width: 1024px) {
+    .content-page {
+        /* 平板端减小最大宽度，增加左右留白 */
+        max-width: 95%;
+        margin: 0 auto;
+    }
+    
+    /* 文档页面平板端调整 */
+    body.page-docs .content-page.content-page-has-toc {
+        padding-left: var(--file-nav-left-margin);
+        padding-right: var(--toc-right-margin);
+    }
+    
+    /* 博客页面平板端调整 */
+    body.page-blog .content-page.blog-page.content-page-has-toc {
+        padding-left: var(--blog-left-margin);
+        padding-right: var(--toc-right-margin);
+    }
+    
+    /* 文件导航和平板端调整 */
+    .content-sidebar {
+        width: 200px;
+    }
+    
+    /* 目录平板端调整 */
+    .toc-sidebar {
+        width: 180px;
+    }
+    
+    /* 减小正文最大宽度 */
+    .content-page-has-toc .content-main {
+        max-width: none;
+    }
+}
+
+/* ===== 移动端 (≤768px) ===== */
+@media (max-width: 768px) {
+    .content-page {
+        flex-direction: column;
+        padding-top: 100px;
+        /* 移动端使用变量控制的内距 */
+        padding-left: var(--file-nav-left-margin);
+        padding-right: var(--file-nav-left-margin);
+        max-width: 100%;
+    }
+
+    .content-sidebar {
+        width: 100%;
+        position: static;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        padding-bottom: 20px;
+        max-height: 300px;
+        display: block;
+    }
+    
+    /* 移动端隐藏内部占位元素 */
+    .content-sidebar-inner-left {
+        display: none;
+    }
+    
+    /* 移动端恢复 sidebar-tree 正常布局 */
+    .content-sidebar .sidebar-tree {
+        flex: none;
+    }
+
+    .sidebar-tree {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
+
+    .sidebar-item-header {
+        padding: 8px 12px;
+    }
+    
+    /* 移动端目录显示在底部 */
+    .toc-sidebar {
+        width: 100%;
+        position: static;
+        border-left: none;
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        padding-left: 0;
+        padding-top: 20px;
+        max-height: 200px;
+    }
+    
+    /* 移动端取消正文宽度限制 */
+    .content-page-has-toc .content-main {
+        max-width: none;
+    }
+    
+    /* 文档页面移动端调整 */
+    body.page-docs .content-page,
+    body.page-docs .content-page.content-page-has-toc,
+    body.page-docs .content-page:not(.content-page-has-toc) {
+        padding-left: var(--file-nav-left-margin);
+        padding-right: var(--file-nav-left-margin);
+    }
+    
+    /* 博客页面移动端调整 */
+    body.page-blog .content-page,
+    body.page-blog .content-page.blog-page.content-page-has-toc,
+    body.page-blog .content-page.blog-page:not(.content-page-has-toc) {
+        padding-left: var(--blog-left-margin);
+        padding-right: var(--blog-left-margin);
+    }
+}

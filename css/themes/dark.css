@@ -1,0 +1,524 @@
+/* 暗色模式统一样式 */
+
+/* ========== 全局暗色 ========== */
+
+[data-theme="dark"] body {
+    color: #e0e0e0;
+    background-color: #1a1a1a;
+}
+
+/* ========== 导航栏暗色 ========== */
+
+[data-theme="dark"] #navbar {
+    background-color: rgba(30, 30, 30, 0.7);
+    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(30px);
+    color: #e0e0e0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .navbar-brand a {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .navbar-links a {
+    color: #ccc;
+}
+
+[data-theme="dark"] .navbar-links a:hover,
+[data-theme="dark"] .navbar-links a.active {
+    color: #5dade2;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .search-box input {
+    background-color: rgba(60, 60, 60, 0.6);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+[data-theme="dark"] .search-box input:focus {
+    background-color: rgba(60, 60, 60, 0.9);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .search-icon {
+    opacity: 0.5;
+}
+
+[data-theme="dark"] .github-link {
+    color: #e0e0e0;
+}
+
+/* 搜索结果暗色样式 */
+[data-theme="dark"] .search-results {
+    background-color: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .search-results a {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .search-results a:hover,
+[data-theme="dark"] .search-results a.search-active {
+    background-color: rgba(52, 152, 219, 0.12);
+}
+
+[data-theme="dark"] .search-title {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .search-excerpt {
+    color: #999;
+}
+
+[data-theme="dark"] .search-match {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffc107;
+}
+
+[data-theme="dark"] .search-no-results {
+    color: #777;
+}
+
+[data-theme="dark"] .search-results::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .search-results::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* ========== 移动菜单暗色 ========== */
+
+[data-theme="dark"] .mobile-menu {
+    background-color: #1e1e1e;
+}
+
+[data-theme="dark"] .mobile-menu a {
+    color: #ccc;
+}
+
+[data-theme="dark"] .mobile-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .mobile-menu a.active {
+    color: #5dade2;
+}
+
+[data-theme="dark"] .mobile-search {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .mobile-menu-divider {
+    border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .mobile-menu-section-title {
+    color: #666;
+}
+
+/* ========== About页面暗色 ========== */
+
+[data-theme="dark"] .about-logo {
+    box-shadow: 0 8px 32px rgba(52, 152, 219, 0.15);
+}
+
+[data-theme="dark"] .about-hero h1 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .about-tagline {
+    color: #999;
+}
+
+[data-theme="dark"] .stat-num {
+    color: #5dade2;
+}
+
+[data-theme="dark"] .stat-label {
+    color: #777;
+}
+
+[data-theme="dark"] .stat-divider {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .tech-badge {
+    background-color: rgba(255, 255, 255, 0.06);
+    color: #aaa;
+}
+
+[data-theme="dark"] .tech-badge:hover {
+    background-color: #3498db;
+    color: #fff;
+}
+
+[data-theme="dark"] .about-link-card {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .about-link-card:hover {
+    box-shadow: 0 8px 24px rgba(52, 152, 219, 0.1);
+    color: #5dade2;
+}
+
+/* ========== Hero区域暗色 ========== */
+
+[data-theme="dark"] .hero-title {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .hero-subtitle {
+    color: #999;
+}
+
+[data-theme="dark"] .btn-primary {
+    background-color: #2980b9;
+}
+
+[data-theme="dark"] .btn-primary:hover {
+    background-color: #1f6fa8;
+}
+
+/* ========== 页面容器暗色 ========== */
+
+[data-theme="dark"] .page-container {
+    background-color: #2a2a2a;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .page-container h1 {
+    color: #e0e0e0;
+}
+
+/* ========== 项目表暗色 ========== */
+
+[data-theme="dark"] .section-title {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .scroll-btn {
+    background-color: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .scroll-btn:hover {
+    background-color: #3a3a3a;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .project-card {
+    background-color: #2a2a2a;
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .project-card:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .project-name {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .project-desc {
+    color: #999;
+}
+
+/* ========== 页脚暗色 ========== */
+
+[data-theme="dark"] .site-footer {
+    background-color: #1e1e1e;
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .footer-brand-text {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .footer-tagline {
+    color: #999;
+}
+
+[data-theme="dark"] .footer-heading {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .footer-links a,
+[data-theme="dark"] .footer-community a,
+[data-theme="dark"] .footer-friends a {
+    color: #999;
+}
+
+[data-theme="dark"] .footer-links a:hover,
+[data-theme="dark"] .footer-community a:hover,
+[data-theme="dark"] .footer-friends a:hover {
+    color: #5dade2;
+}
+
+[data-theme="dark"] .footer-bottom {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .footer-bottom p {
+    color: #666;
+}
+
+/* ========== 侧边栏暗色 ========== */
+
+[data-theme="dark"] .content-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .content-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .sidebar-item-title {
+    color: #999;
+}
+
+[data-theme="dark"] .sidebar-item-header:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .sidebar-arrow {
+    color: #666;
+}
+
+/* ========== 目录(TOC)暗色 ========== */
+
+[data-theme="dark"] .toc-sidebar {
+    border-left-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .toc-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .toc-sidebar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .toc-link {
+    color: #888;
+}
+
+[data-theme="dark"] .toc-link:hover {
+    color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* ========== Meta弹窗暗色 ========== */
+
+[data-theme="dark"] .meta-popup-content {
+    background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .meta-popup-header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .meta-popup-header h4 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .meta-popup-close {
+    color: #666;
+}
+
+[data-theme="dark"] .meta-popup-close:hover {
+    color: #ccc;
+}
+
+[data-theme="dark"] .meta-popup-date {
+    color: #999;
+}
+
+/* ========== 文章内容暗色 ========== */
+
+[data-theme="dark"] .article-header h1 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .article-content {
+    color: #ccc;
+}
+
+[data-theme="dark"] .article-content h2 {
+    color: #e0e0e0;
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .article-content h3,
+[data-theme="dark"] .article-content h4 {
+    color: #d4d4d4;
+}
+
+[data-theme="dark"] .article-content blockquote {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: #aaa;
+}
+
+[data-theme="dark"] .article-content code {
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .article-content pre {
+    background-color: #1e1e1e;
+    color: #d4d4d4;
+}
+
+/* 代码块暗色滚动条 */
+[data-theme="dark"] .article-content pre::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .article-content pre::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .article-content pre::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+[data-theme="dark"] .article-content pre code::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme="dark"] .article-content pre code::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="dark"] .article-content pre code::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+/* 表格暗色 */
+[data-theme="dark"] .article-content th {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+[data-theme="dark"] .article-content th,
+[data-theme="dark"] .article-content td {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 定义列表暗色 */
+[data-theme="dark"] .article-content dt {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .article-content dd {
+    color: #aaa;
+}
+
+/* 脚注暗色 */
+[data-theme="dark"] .article-content .footnotes-sep {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .article-content .footnotes {
+    color: #999;
+}
+
+/* 提示框暗色 */
+[data-theme="dark"] .article-content .admonition {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+[data-theme="dark"] .article-content .admonition.note,
+[data-theme="dark"] .article-content .note {
+    border-left-color: #3498db;
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+[data-theme="dark"] .article-content .admonition.note .admonition-title,
+[data-theme="dark"] .article-content .note .admonition-title {
+    color: #5dade2;
+}
+
+[data-theme="dark"] .article-content .admonition.tip,
+[data-theme="dark"] .article-content .tip {
+    border-left-color: #27ae60;
+    background-color: rgba(39, 174, 96, 0.1);
+}
+
+[data-theme="dark"] .article-content .admonition.tip .admonition-title,
+[data-theme="dark"] .article-content .tip .admonition-title {
+    color: #58d68d;
+}
+
+[data-theme="dark"] .article-content .admonition.info,
+[data-theme="dark"] .article-content .info {
+    border-left-color: #1abc9c;
+    background-color: rgba(26, 188, 156, 0.1);
+}
+
+[data-theme="dark"] .article-content .admonition.info .admonition-title,
+[data-theme="dark"] .article-content .info .admonition-title {
+    color: #48c9b0;
+}
+
+[data-theme="dark"] .article-content .admonition.warning,
+[data-theme="dark"] .article-content .warning {
+    border-left-color: #f39c12;
+    background-color: rgba(243, 156, 18, 0.1);
+}
+
+[data-theme="dark"] .article-content .admonition.warning .admonition-title,
+[data-theme="dark"] .article-content .warning .admonition-title {
+    color: #f5b041;
+}
+
+[data-theme="dark"] .article-content .admonition.danger,
+[data-theme="dark"] .article-content .danger {
+    border-left-color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+[data-theme="dark"] .article-content .admonition.danger .admonition-title,
+[data-theme="dark"] .article-content .danger .admonition-title {
+    color: #ec7063;
+}
+
+/* 数学公式暗色 */
+[data-theme="dark"] .article-content .math.block {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* ========== 文章底部暗色 ========== */
+
+[data-theme="dark"] .article-last-modified {
+    color: #777;
+    border-top-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ========== 文章卡片暗色 ========== */
+
+[data-theme="dark"] .tag {
+    background-color: rgba(255, 255, 255, 0.08);
+    color: #bbb;
+}
+
+[data-theme="dark"] .article-card {
+    background-color: #2a2a2a;
+}
+
+[data-theme="dark"] .article-card h3 {
+    color: #e0e0e0;
+}
+
+[data-theme="dark"] .article-card p {
+    color: #999;
+}

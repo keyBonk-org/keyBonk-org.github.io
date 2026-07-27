@@ -1,0 +1,29 @@
+/* 脚注样式 */
+
+.article-content .footnote-ref {
+    font-size: 0.8em;
+}
+
+.article-content .footnotes-sep {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 30px 0 20px;
+}
+
+.article-content .footnotes {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.article-content .footnotes-list {
+    padding-left: 20px;
+}
+
+.article-content .footnote-item p {
+    margin: 5px 0;
+}
+
+.article-content .footnote-backref {
+    font-size: 0.8em;
+    text-decoration: none;
+}

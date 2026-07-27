@@ -1,1 +1,6 @@
-__pycache__
+# Python 缓存
+__pycache__/
+*.pyc
+
+# 日志文件
+log.txt
