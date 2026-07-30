@@ -194,10 +194,28 @@ def build_site():
                         
                         plain_text = extract_text_from_markdown(body)
                         
+                        # 标记代码块内的行号
+                        lines = body.split('\n')
+                        code_block_lines = set()
+                        in_code_block = False
+                        for i, line in enumerate(lines):
+                            stripped = line.strip()
+                            if stripped.startswith('```'):          # 围栏代码块开始/结束
+                                in_code_block = not in_code_block
+                                continue
+                            if in_code_block:
+                                code_block_lines.add(i)             # 该行在代码块内部
+
+                        # 遍历所有匹配，但只保留非代码块内的
+                        heading_matches = []
+                        for match in re.finditer(r'^(#{1,4})\s+(.+)$', body, re.MULTILINE):
+                            line_num = body[:match.start()].count('\n')
+                            if line_num not in code_block_lines:
+                                heading_matches.append(match)
+
+                        # 使用过滤后的heading_matches构建标题及内容
                         headings = []
                         heading_contents = {}
-                        heading_matches = list(re.finditer(r'^(#{1,4})\s+(.+)$', body, re.MULTILINE))
-                        
                         for i, match in enumerate(heading_matches):
                             level = len(match.group(1))
                             text = match.group(2).strip()
