@@ -14,10 +14,10 @@ weight: 4
 下面是与音频库播放功能直接相关的几个核心接口，我们先来粗略的看一遍：
 
 ```cpp
-namespace yumo{
-	size_t preloadAudio(const wchar_t *filename, readySign *ready = nullptr);
-	size_t addAudio(size_t preloadedId, float volume = 1.0f);
-	void addAudio(const wchar_t *filename, float volume = 1.0f, size_t *instanceId = nullptr, readySign *ready = nullptr);
+namespace yumo {
+    size_t preloadAudio(const wchar_t *filename, readySign *ready = nullptr);
+    audioInstance addAudio(size_t preloadedId, float volume = 1.0f);
+    void addAudio(const wchar_t *filename, float volume = 1.0f, audioInstance *instance = nullptr, readySign *ready = nullptr);
 }
 ```
 
@@ -73,7 +73,7 @@ size_t preloadId = yumo::preloadAudio(L"./test.wav", &ready);
 ### 原型
 
 ```cpp
-size_t addAudio(
+yumo::audioInstance addAudio(
 	size_t preloadedId,
 	float  volume = 1.0f
 );
@@ -95,16 +95,16 @@ size_t addAudio(
 
 ### 返回值
 
-类型：**size_t**
+类型：**yumo::audioInstance**
 
-音频加入队列后创建的播放实例的ID。
+音频加入队列后创建的播放实例。
 
 ### 示例
 
 ```cpp
 yumo::readySign ready(false);
 size_t preloadId = yumo::preloadAudio(L"./test.wav", &ready);
-size_t instanceId = yumo::addAudio(preloadId, 0.7f);
+yumo::audioInstance instance = yumo::addAudio(preloadId, 0.7f);
 ```
 
 ## 无预处理播放
@@ -117,10 +117,11 @@ size_t instanceId = yumo::addAudio(preloadId, 0.7f);
 
 ```cpp
 void addAudio(
-	const wchar_t *filename,
-	float         volume = 1.0f,
-	size_t        *instanceId = nullptr,
-	readySign     *ready = nullptr);
+    const wchar_t       *filename,
+    float                volume = 1.0f,
+    yumo::audioInstance *instance = nullptr,
+    yumo::readySign     *ready = nullptr
+);
 ```
 
 ### 参数
@@ -137,11 +138,11 @@ void addAudio(
 
 音频开始播放时的初始音量，最大为1，最小为0，默认为1。
 
-`[out,optional] instanceId`
+`[out,optional] instance`
 
-类型：**size_t\***
+类型：**yumo::audioInstance\***
 
-一个指针，用于获取播放实例ID，如果音频足够长且需要一些诸如音量调整的精细操作，则需要接受ID。
+一个指针，用于获取播放实例，如果音频足够长且需要一些诸如音量调整的精细操作，则需要接受这个实例。有关播放实例，详见[播放实例](../status/#播放实例)
 
 `[out,optional] ready`
 

@@ -5,7 +5,7 @@ avatar: /imgs/xiaodi.jpg
 title: 全局状态管理
 summary: 介绍如何使用全局变量控制所有音频的播放状态
 tags: ["Yumo audio","全局状态","播放控制"]
-weight: 7
+weight: 8
 ---
 
 除了对单个音频实例进行控制外，Yumo audio 还提供了全局状态管理机制，允许一次性控制所有正在播放的音频。

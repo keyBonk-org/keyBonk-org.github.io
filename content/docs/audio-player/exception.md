@@ -5,7 +5,7 @@ avatar: /imgs/xiaodi.jpg
 title: 错误处理
 summary: 介绍 Yumo audio的异常体系与错误处理机制
 tags: ["Yumo audio","异常","错误处理"]
-weight: 8
+weight: 9
 ---
 
 Yumo audio使用自定义的异常类体系来报告和处理错误。所有异常类都定义在`yumo_except.hpp`中，位于`yumo`命名空间下。这个头文件是可选的，你完全可以选择不处理异常，当然，对应的就是你可能需要面对程序异常崩溃。
@@ -32,20 +32,29 @@ yumo::w_exception        (独立的宽字符异常类，不继承自 exception)
 
 `yumo::exception`类中定义了一个枚举`type`，用于标识不同的错误类型，包含以下几种类型
 
-|错误类型|说明|库内是否使用|使用场景（部分）|
-|---|---|---|---|
-|`FileNotFound`|文件未找到|未使用|音频文件路径错误|
-|`FileOpenError`|文件打开失败|使用|权限不足等导致打开失败|
-|`FileReadError`|文件读取错误|使用|文件损坏或读取权限问题|
-|`FileWriteError`|文件写入错误|未使用|文件不存在或读取权限问题|
-|`FileCloseError`|文件关闭错误|未使用|<del>我也不知道啥情况会用上这个</del>|
-|`FileError`|通用文件错误|使用|文件错误但无法确定是哪个错误|
-|`InvalidInput`|输入参数无效|使用|传入的音频ID无效|
-|`InvalidFormat`|格式错误|未使用|音频格式不支持|
-|`InvalidState`|状态不允许|未使用|在错误的状态下调用了API|
-|`OutOfMemory`|内存不足|使用|加载过大的音频文件|
-|`MemoryError`|内存错误|未使用|无法确定具体原因的内存错误|
-|`UnknownError`|未知错误|使用|原因未知且无法粗略确定归属的错误|
+根据代码实现（`audioPlayer.cpp`）中实际使用的异常类型，文档 `exception.md` 中的“错误类型枚举”表格需要更新。以下是修正后的版本：
+
+`yumo::exception` 类中定义了一个枚举 `type`，用于标识不同的错误类型。下表列出了**库内实际使用**的错误类型及其场景：
+
+| 错误类型 | 库内是否使用 | 库内使用位置 |
+|---|---|---|
+| `FileNotFound` | ❌ 未使用 | — |
+| `FileOpenError` | ✅ 使用 | `CreateFileW` 失败时抛出（`loadWav`、`loadAudio` 中的 MP3 分支） |
+| `FileReadError` | ✅ 使用 | `ReadFile` 失败或读取字节数不匹配时抛出 |
+| `FileWriteError` | ❌ 未使用 | — |
+| `FileCloseError` | ❌ 未使用 | — |
+| `FileError` | ✅ 使用 | `SetFilePointer` 失败时抛出 |
+| `InvalidInput` | ✅ 使用 | 音频格式校验失败（非 PCM、不支持的声道/位深度/采样率）、MP3 解析失败、参数无效等 |
+| `InvalidFormat` | ❌ 未使用 | — |
+| `InvalidID` | ✅ 使用 | 无效的预加载音频 ID 或播放实例 ID |
+| `InvalidData` | ✅ 使用 | 预加载音频数据为空或加载失败 |
+| `InvalidState` | ❌ 未使用 | — |
+| `OutOfMemory` | ✅ 使用 | `std::make_unique` 分配内存失败时抛出 |
+| `MemoryError` | ❌ 未使用 | — |
+| `CustomizedError` | ❌ 未使用 | — |
+| `UnknownError` | ✅ 使用 | 无法归类或未知原因的错误（如 `decodeMp3ToStandard` 中 ACM 重采样失败） |
+| `PlaybackError` | ✅ 使用 | `waveOutOpen`、`waveOutWrite`、`waveOutPrepareHeader` 等播放相关 API 失败 |
+| `DecodeError` | ✅ 使用 | `acmStreamOpen`、`acmStreamConvert` 等音频解码/转换 API 失败 |
 
 由于这个头的设计目的并不局限于这一个库，有些错误类型实际上并没有使用到，可以参考“库内是否使用”一栏。
 
