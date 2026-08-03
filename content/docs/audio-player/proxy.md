@@ -1,10 +1,7 @@
 ---
 date: 2026-08-03
-author:
-  - name: 小狄同学呀
-    avatar: /imgs/xiaodi.jpg
-  - name: Yumo-sama
-    avatar: /imgs/yumo.jpg
+author: Yumo-sama
+avatar: /imgs/yumo.jpg
 title: proxy代理类
 summary: 了解audioInstance中的代理成员工作原理
 tags: ["Yumo audio","proxy","内部机制"]

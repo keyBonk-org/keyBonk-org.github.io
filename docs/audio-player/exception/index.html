@@ -133,6 +133,11 @@
                         </div>
                         <div class="sidebar-item">
                             <div class="sidebar-item-header">
+                                <a href="/docs/audio-player/proxy/" class="sidebar-item-title">proxy代理类</a>
+                            </div>
+                        </div>
+                        <div class="sidebar-item">
+                            <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/global/" class="sidebar-item-title">全局状态管理</a>
                             </div>
                         </div>
@@ -180,87 +185,101 @@ yumo::w_exception        (独立的宽字符异常类，不继承自 exception)
 </code></pre>
 <h2 id="错误类型枚举">错误类型枚举</h2>
 <p><code>yumo::exception</code>类中定义了一个枚举<code>type</code>，用于标识不同的错误类型，包含以下几种类型</p>
+<p>根据代码实现（<code>audioPlayer.cpp</code>）中实际使用的异常类型，文档 <code>exception.md</code> 中的“错误类型枚举”表格需要更新。以下是修正后的版本：</p>
+<p><code>yumo::exception</code> 类中定义了一个枚举 <code>type</code>，用于标识不同的错误类型。下表列出了<strong>库内实际使用</strong>的错误类型及其场景：</p>
 <table>
 <thead>
 <tr>
 <th>错误类型</th>
-<th>说明</th>
 <th>库内是否使用</th>
-<th>使用场景（部分）</th>
+<th>库内使用位置</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>FileNotFound</code></td>
-<td>文件未找到</td>
-<td>未使用</td>
-<td>音频文件路径错误</td>
+<td>❌ 未使用</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>FileOpenError</code></td>
-<td>文件打开失败</td>
-<td>使用</td>
-<td>权限不足等导致打开失败</td>
+<td>✅ 使用</td>
+<td><code>CreateFileW</code> 失败时抛出（<code>loadWav</code>、<code>loadAudio</code> 中的 MP3 分支）</td>
 </tr>
 <tr>
 <td><code>FileReadError</code></td>
-<td>文件读取错误</td>
-<td>使用</td>
-<td>文件损坏或读取权限问题</td>
+<td>✅ 使用</td>
+<td><code>ReadFile</code> 失败或读取字节数不匹配时抛出</td>
 </tr>
 <tr>
 <td><code>FileWriteError</code></td>
-<td>文件写入错误</td>
-<td>未使用</td>
-<td>文件不存在或读取权限问题</td>
+<td>❌ 未使用</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>FileCloseError</code></td>
-<td>文件关闭错误</td>
-<td>未使用</td>
-<td><del>我也不知道啥情况会用上这个</del></td>
+<td>❌ 未使用</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>FileError</code></td>
-<td>通用文件错误</td>
-<td>使用</td>
-<td>文件错误但无法确定是哪个错误</td>
+<td>✅ 使用</td>
+<td><code>SetFilePointer</code> 失败时抛出</td>
 </tr>
 <tr>
 <td><code>InvalidInput</code></td>
-<td>输入参数无效</td>
-<td>使用</td>
-<td>传入的音频ID无效</td>
+<td>✅ 使用</td>
+<td>音频格式校验失败（非 PCM、不支持的声道/位深度/采样率）、MP3 解析失败、参数无效等</td>
 </tr>
 <tr>
 <td><code>InvalidFormat</code></td>
-<td>格式错误</td>
-<td>未使用</td>
-<td>音频格式不支持</td>
+<td>❌ 未使用</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>InvalidID</code></td>
+<td>✅ 使用</td>
+<td>无效的预加载音频 ID 或播放实例 ID</td>
+</tr>
+<tr>
+<td><code>InvalidData</code></td>
+<td>✅ 使用</td>
+<td>预加载音频数据为空或加载失败</td>
 </tr>
 <tr>
 <td><code>InvalidState</code></td>
-<td>状态不允许</td>
-<td>未使用</td>
-<td>在错误的状态下调用了API</td>
+<td>❌ 未使用</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>OutOfMemory</code></td>
-<td>内存不足</td>
-<td>使用</td>
-<td>加载过大的音频文件</td>
+<td>✅ 使用</td>
+<td><code>std::make_unique</code> 分配内存失败时抛出</td>
 </tr>
 <tr>
 <td><code>MemoryError</code></td>
-<td>内存错误</td>
-<td>未使用</td>
-<td>无法确定具体原因的内存错误</td>
+<td>❌ 未使用</td>
+<td>—</td>
+</tr>
+<tr>
+<td><code>CustomizedError</code></td>
+<td>❌ 未使用</td>
+<td>—</td>
 </tr>
 <tr>
 <td><code>UnknownError</code></td>
-<td>未知错误</td>
-<td>使用</td>
-<td>原因未知且无法粗略确定归属的错误</td>
+<td>✅ 使用</td>
+<td>无法归类或未知原因的错误（如 <code>decodeMp3ToStandard</code> 中 ACM 重采样失败）</td>
+</tr>
+<tr>
+<td><code>PlaybackError</code></td>
+<td>✅ 使用</td>
+<td><code>waveOutOpen</code>、<code>waveOutWrite</code>、<code>waveOutPrepareHeader</code> 等播放相关 API 失败</td>
+</tr>
+<tr>
+<td><code>DecodeError</code></td>
+<td>✅ 使用</td>
+<td><code>acmStreamOpen</code>、<code>acmStreamConvert</code> 等音频解码/转换 API 失败</td>
 </tr>
 </tbody>
 </table>
@@ -520,7 +539,7 @@ int main() {
 </div>
 
                     </div>
-                    <div class="article-last-modified">最后一次修改时间：2026-07-27 17:59</div>
+                    <div class="article-last-modified">最后一次修改时间：2026-08-03 17:35</div>
                 </div>
                 
                 <div class="toc-sidebar">

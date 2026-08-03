@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>音频播放状态管理 - KeyBonk</title>
+    <title>proxy代理类 - KeyBonk</title>
     <link rel="icon" href="/imgs/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/highlight.css" id="hljs-light">
@@ -126,12 +126,12 @@
                                 <a href="/docs/audio-player/atomic/" class="sidebar-item-title">原子类与其typedef</a>
                             </div>
                         </div>
-                        <div class="sidebar-item active">
+                        <div class="sidebar-item">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/status/" class="sidebar-item-title">音频播放状态管理</a>
                             </div>
                         </div>
-                        <div class="sidebar-item">
+                        <div class="sidebar-item active">
                             <div class="sidebar-item-header">
                                 <a href="/docs/audio-player/proxy/" class="sidebar-item-title">proxy代理类</a>
                             </div>
@@ -158,141 +158,63 @@
                 <div class="content-main">
                     
                     <div class="article-header">
-                        <h1>音频播放状态管理</h1>
+                        <h1>proxy代理类</h1>
                         <div class="article-meta">
                             <div class="meta-truncated">
                                 
-                                <div class="meta-authors"><span class="meta-author"><img src="/imgs/xiaodi.jpg" alt="小狄同学呀" class="meta-avatar">小狄同学呀</span><span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span></div>
+                                <span class="meta-author"><img src="/imgs/yumo.jpg" alt="Yumo-sama" class="meta-avatar">Yumo-sama</span>
                                 <span class="meta-date">2026-08-03</span>
-                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">状态管理</span><span class="tag">播放控制</span></div>
+                                <div class="meta-tags"><span class="tag">Yumo audio</span><span class="tag">proxy</span><span class="tag">内部机制</span></div>
                             </div>
                             
                         </div>
                         
                     </div>
                     <div class="article-content">
-                        <p>通过<code>addAudio</code>函数，可以获得一个<code>yumo::audioInstance</code>对象，它代表一个独立的播放实例。通过该对象，您可以对单个音频进行精细控制。</p>
-<h2 id="播放实例的获取">播放实例的获取</h2>
-<h3 id="从addaudio获得">从<code>addAudio</code>获得</h3>
-<pre><code class="language-cpp">yumo::audioInstance inst = yumo::addAudio(preloadId, 0.8f);
-</code></pre>
-<h3 id="通过-id-重新获取">通过 ID 重新获取</h3>
-<p>如果你的<code>audioInstance</code>对象因为某些原因丢失了，但是ID被保存了下来，比如一些只能按值传递整数的场景，可以使用<code>regain</code>函数通过实例ID重新获取：</p>
-<pre><code class="language-cpp">yumo::audioInstance inst = yumo::regain(instanceId);
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>目前的版本中，如果当实例已被移除或播放完毕，<code>regain</code>将返回一个<code>instanceId</code>为<code>0</code>的无效对象，如果传入的ID正好就是<code>0</code>则可能会有问题，具体的修复请关注后续版本的文档</p>
-</div>
-<h2 id="控制播放">控制播放</h2>
-<p><code>audioInstance</code>提供了几个<strong>代理成员</strong>，您可以像操作普通变量一样读写它们，每个操作都会自动同步到播放引擎。</p>
-<table>
-<thead>
-<tr>
-<th>成员</th>
-<th>类型</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>position</code></td>
-<td><code>proxy&lt;size_t&gt;</code></td>
-<td>当前播放位置（样本索引）。读取获得当前位置，写入可跳转。</td>
-</tr>
-<tr>
-<td><code>volume</code></td>
-<td><code>proxy&lt;float&gt;</code></td>
-<td>音量（0.0 ~ 1.0）。修改立即生效。</td>
-</tr>
-<tr>
-<td><code>stopped</code></td>
-<td><code>proxy&lt;bool&gt;</code></td>
-<td>暂停/恢复：设为<code>true</code>暂停（位置不推进），<code>false</code> 恢复。</td>
-</tr>
-<tr>
-<td><code>muted</code></td>
-<td><code>proxy&lt;bool&gt;</code></td>
-<td>静音：设为<code>true</code>静音（位置继续推进），<code>false</code> 取消。</td>
-</tr>
-</tbody>
-</table>
-<h3 id="示例暂停与恢复">示例：暂停与恢复</h3>
-<pre><code class="language-cpp">inst.stopped   = true;   // 暂停
-bool isStopped = inst.stopped
-inst.stopped   = false;  // 从暂停处继续
-</code></pre>
-<h3 id="示例静音控制">示例：静音控制</h3>
-<pre><code class="language-cpp">inst.muted = true;     // 静音，但位置继续推进
-inst.muted = false;    // 取消静音
-</code></pre>
-<h3 id="示例调节音量">示例：调节音量</h3>
-<pre><code class="language-cpp">inst.volume = 0.5f;    // 设置为 50%
-float vol = inst.volume; // 读取当前音量
-</code></pre>
-<h3 id="示例跳转播放位置">示例：跳转播放位置</h3>
-<pre><code class="language-cpp">inst.position = 44100 * 10; // 跳转到第 10 秒（44.1kHz 采样率）
-size_t current = inst.position; // 获取当前位置
-</code></pre>
-<blockquote>
-<p><strong>注意</strong>：<code>position</code> 的单位是采样点（样本数），对于立体声 16 位格式，每个采样点对应一个 <code>int16_t</code> 值（左声道和右声道交替存储）。调整位置时请确保不超过音频总长度，否则音频会提前结束。</p>
-</blockquote>
-<h2 id="检查播放状态">检查播放状态</h2>
-<p><code>audioInstance</code>提供了<code>isPlaying</code>方法，通过这个方法可以检查音频是否正在播放</p>
-<pre><code class="language-cpp">bool playing = inst.isPlaying();
-</code></pre>
-<h2 id="移除播放实例">移除播放实例</h2>
-<p>手动从播放池中移除一个实例，释放资源：</p>
-<pre><code class="language-cpp">bool remove(size_t instanceId);
-</code></pre>
-<p>返回 <code>true</code> 表示移除成功，<code>false</code> 表示 ID 无效。</p>
-<pre><code class="language-cpp">if (yumo::remove(inst.instanceId)) {
-    std::cout &lt;&lt; &quot;已移除&quot; &lt;&lt; std::endl;
-}
-</code></pre>
-<h2 id="重置所有实例">重置所有实例</h2>
-<p>将当前所有播放实例的位置重置到开头，相当于重新播放所有音频：</p>
-<pre><code class="language-cpp">void resetAll();
-</code></pre>
-<pre><code class="language-cpp">yumo::resetAll(); // 所有音频从头开始
-</code></pre>
-<h2 id="监听播放完成">监听播放完成</h2>
-<p>您可以为库注册一个回调函数，当某个播放实例自然播放结束并被自动回收时，该回调会被触发，通知您该实例的ID。</p>
-<pre><code class="language-cpp">void registerPlaybackFinishedCallback(PlaybackFinishedCallback callback);
-void unregisterPlaybackFinishedCallback();
-</code></pre>
-<p><code>PlaybackFinishedCallback</code> 定义：</p>
-<pre><code class="language-cpp">using PlaybackFinishedCallback = std::function&lt;void(size_t instanceId)&gt;;
-</code></pre>
-<p>示例：</p>
-<pre><code class="language-cpp">const int AUDIO_COUNT = 10;
-int playCount = 0;
-void myCallback(size_t id) {
-    std::cout &lt;&lt; &quot;实例 &quot; &lt;&lt; id &lt;&lt; &quot; 播放完毕&quot; &lt;&lt; std::endl;
-    playCount++;
-}
-
-yumo::registerPlaybackFinishedCallback(myCallback);
-// 播放若干音频
-while (playCount != AUDIO_COUNT)
+                        <h2 id="什么是-yumoaudioinstanceproxy">什么是 <code>yumo::audioInstance::proxy</code>？</h2>
+<p><code>proxy</code>是<code>audioInstance</code>内部定义的一个模板类，用于<strong>模拟普通变量的读写行为</strong>。它的作用是让您能够像操作普通成员变量一样操作播放状态，而无需调用额外的函数</p>
+<h3 id="原型">原型</h3>
+<pre><code class="language-cpp">template &lt;typename T&gt;
+class proxy
 {
-    std::this_thread::sleep_for(std::chrono::milliseconds(10));
-}
-// 注销回调
-yumo::unregisterPlaybackFinishedCallback();
-// 无回调的播放若干音频
-
+public:
+    proxy();
+    proxy(T &amp;value);
+    proxy(const proxy &amp;other);
+    proxy &amp;operator=(const proxy &amp;other) = delete;
+    operator T() const;
+    proxy &amp;operator=(T value);
+};
 </code></pre>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>回调在库的内部线程中执行，请勿在回调中执行耗时操作或调用可能阻塞的库函数。</p>
-</div>
-<h2 id="注意事项">注意事项</h2>
+<h2 id="为什么要设计成代理">为什么要设计成代理？</h2>
+<p>在老版本API中，控制播放状态通常需要一系列函数，例如：</p>
+<pre><code class="language-cpp">setVolume(id, 0.5f);
+float v = getVolume(id);
+stop(id);
+resume(id);
+</code></pre>
+<p>这种设计虽然清晰，但略显繁琐。而通过代理成员，您可以直接写出更自然的代码：</p>
+<pre><code class="language-cpp">inst.volume = 0.5f;
+float v = inst.volume;
+inst.stopped = true;
+inst.stopped = false;
+</code></pre>
+<p>这大大简化了状态管理，使代码更简洁、易读。</p>
+<h2 id="使用场景">使用场景</h2>
+<p><code>proxy</code>仅作为<code>audioInstance</code>的成员出现，你<strong>永远不应该</strong>需要直接声明或初始化一个<code>proxy</code>对象。您只需要通过<code>audioInstance</code>的成员（如<code>position</code>、<code>volume</code>、<code>stopped</code>等）来读写即可。</p>
+<pre><code class="language-cpp">yumo::audioInstance inst = ...;
+inst.volume = 0.8f;          // 赋值 -&gt; 修改音量
+float vol = inst.volume;     // 读取 -&gt; 获取当前音量
+</code></pre>
+<h2 id="为什么不要手动构造-proxy">为什么不要手动构造 <code>proxy</code>？</h2>
 <ul>
-<li>所有 <code>audioInstance</code> 的代理成员操作都是<strong>线程安全</strong>的，您可以在任何线程中读写它们。</li>
-<li>当实例被移除或播放结束后，再操作其代理成员可能无效（但不会崩溃）。</li>
-<li>建议不要试图手动构造<code>proxy</code>对象（详见<a href="../proxy">proxy类说明</a>）。</li>
+<li><code>proxy</code>对象内部依赖 <code>audioInstance</code> 提供的互斥锁和指针，手动构造会破坏内部状态。</li>
+<li>它只是一个<strong>语法糖</strong>，其本质是对底层播放引擎的调用封装。直接操作 <code>proxy</code> 对象本身没有意义。</li>
+<li>如果您需要在其他上下文中控制播放，请始终通过有效的<code>audioInstance</code>对象来操作。</li>
 </ul>
+<blockquote>
+<p><strong>结论</strong>：<code>proxy</code>的设计目的在于让状态控制更自然。您无需理解其实现，只需按普通变量的方式使用它即可。</p>
+</blockquote>
 
                     </div>
                     <div class="article-last-modified">最后一次修改时间：2026-08-03 17:35</div>
@@ -302,44 +224,20 @@ yumo::unregisterPlaybackFinishedCallback();
                     <div class="toc-title">目录</div>
                     <div class="toc-list">
                         
-                        <a href="#播放实例的获取" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            播放实例的获取
+                        <a href="#什么是-yumoaudioinstanceproxy" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            什么是 yumo::audioInstance::proxy？
                         </a>
-                        <a href="#从addaudio获得" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            从addAudio获得
+                        <a href="#原型" class="toc-link toc-level-3" style="padding-left: 12px;">
+                            原型
                         </a>
-                        <a href="#通过-id-重新获取" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            通过 ID 重新获取
+                        <a href="#为什么要设计成代理" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            为什么要设计成代理？
                         </a>
-                        <a href="#控制播放" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            控制播放
+                        <a href="#使用场景" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            使用场景
                         </a>
-                        <a href="#示例暂停与恢复" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            示例：暂停与恢复
-                        </a>
-                        <a href="#示例静音控制" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            示例：静音控制
-                        </a>
-                        <a href="#示例调节音量" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            示例：调节音量
-                        </a>
-                        <a href="#示例跳转播放位置" class="toc-link toc-level-3" style="padding-left: 12px;">
-                            示例：跳转播放位置
-                        </a>
-                        <a href="#检查播放状态" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            检查播放状态
-                        </a>
-                        <a href="#移除播放实例" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            移除播放实例
-                        </a>
-                        <a href="#重置所有实例" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            重置所有实例
-                        </a>
-                        <a href="#监听播放完成" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            监听播放完成
-                        </a>
-                        <a href="#注意事项" class="toc-link toc-level-2" style="padding-left: 0px;">
-                            注意事项
+                        <a href="#为什么不要手动构造-proxy" class="toc-link toc-level-2" style="padding-left: 0px;">
+                            为什么不要手动构造 proxy？
                         </a>
                     </div>
                 </div>
